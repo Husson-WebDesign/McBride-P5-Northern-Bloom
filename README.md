@@ -1,32 +1,29 @@
-# Client Website Project
+# Project Design Notes
 
-## Developer
+## Phase 1 - HTML Structure
 
-Alex McBride
+### Page Structure
 
-## Course
+body
+├── header
+│   └── nav
+├── main
+│   ├── home
+│   ├── about
+│   ├── services
+│   │   ├── article
+│   │   ├── article
+│   │   └── article
+│   └── contact
+└── footer
 
-Web Design
+## Structure Rationale
 
-## Project
-
-This repository contains my semester client website project.
-
-## Technologies
-
-This project will eventually use:
-
-- HTML5
-- CSS3
-- JavaScript
-- Git
-- GitHub
-
-## Project Status
-
-- [x] Lab 0 - Development Environment Setup
-- [ ] Lab 1 - HTML Structure
-- [ ] Lab 2 - CSS Design
-- [ ] Responsive Design
-- [ ] JavaScript
-- [ ] Final Client Website
+Each element on the website has a function as the content
+is structured using HTML tags. In the header there is a
+navigation menu that helps users navigate from the Home page to the
+About, Services and Contact page. The main tag organizes all the main
+content on the website, whereas the Services section is divided into
+articles. The footer section has additional information related to the website.
+The structure meets the requirements of the client, as it is
+logical, user-friendly, and accessible.
