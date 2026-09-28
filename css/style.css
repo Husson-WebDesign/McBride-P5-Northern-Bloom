@@ -277,7 +277,6 @@ h3 {
     color: var(--color-text-muted);
 }
 
-/* Image-and-text layout (Flexbox) */
 .split {
     display: flex;
     align-items: center;
@@ -305,8 +304,6 @@ h3 {
 /* =========================
    Components
 ========================= */
-
-/* Buttons */
 .button {
     display: inline-block;
     padding: 0.8rem 1.6rem;
@@ -359,14 +356,12 @@ h3 {
     font-size: 0.95rem;
 }
 
-/* Card grid (CSS Grid) */
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: var(--space-md);
 }
 
-/* Cards */
 .card {
     display: flex;
     flex-direction: column;
@@ -392,7 +387,6 @@ h3 {
     margin-top: auto;
 }
 
-/* Call to action band */
 .cta-band {
     padding: var(--space-xl) 0;
     background-color: var(--color-primary);
