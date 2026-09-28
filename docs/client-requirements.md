@@ -1,7 +1,7 @@
 # Client Website Requirements
 
 ## Client
- Pine & Paddle Outdoor Adventures
+Northern Bloom Floral & Events
 
 ## Project
 
