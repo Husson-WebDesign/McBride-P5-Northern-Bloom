@@ -736,3 +736,11 @@ textarea {
     top: var(--space-sm);
     color: #ffffff;
 }
+
+
+/* ---- Respect reduced-motion preferences ---- */
+@media (prefers-reduced-motion: reduce) {
+    .button {
+        transition: none;
+    }
+}
