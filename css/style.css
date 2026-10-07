@@ -109,12 +109,12 @@ h3 {
 }
 
 h1 {
-    font-size: 2.9rem;
+    font-size: clamp(2rem, 1.4rem + 3vw, 2.9rem);
     letter-spacing: -0.01em;
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2rem);
 }
 
 h3 {
@@ -160,7 +160,7 @@ h3 {
     flex-direction: column;
     color: var(--color-primary);
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 1rem + 1.5vw, 1.5rem);
     font-weight: 700;
     line-height: 1.1;
     text-decoration: none;
@@ -191,7 +191,9 @@ h3 {
 }
 
 .site-nav a {
-    display: block;
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
     padding: 0.5rem 0.9rem;
     border-radius: var(--radius);
     color: var(--color-text);
@@ -297,6 +299,8 @@ h3 {
 }
 
 .text-link {
+    display: inline-block;
+    padding: 0.4rem 0;
     font-weight: 600;
 }
 
@@ -305,7 +309,10 @@ h3 {
    Components
 ========================= */
 .button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
     padding: 0.8rem 1.6rem;
     border: 2px solid var(--color-accent);
     border-radius: var(--radius);
@@ -575,5 +582,72 @@ textarea {
     .cta-band-inner {
         flex-direction: column;
         align-items: flex-start;
+    }
+}
+
+
+/* ---- Header, navigation, and hero: tablet ---- */
+@media (max-width: 900px) {
+    /* logo and contact button share the top row, nav gets its own row */
+    .site-nav {
+        order: 3;
+        flex: 1 1 100%;
+    }
+
+    .site-nav ul {
+        justify-content: center;
+    }
+
+    .hero-inner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-content {
+        flex: 0 0 auto;
+    }
+
+    .hero-image {
+        flex: 0 0 auto;
+        width: min(100%, 22rem);
+        margin-inline: auto;
+    }
+}
+
+/* ---- Header, navigation, hero, and typography: smartphone ---- */
+@media (max-width: 600px) {
+    .header-inner {
+        gap: var(--space-xs) var(--space-sm);
+    }
+
+    .site-logo-subtitle {
+        font-size: 0.8rem;
+    }
+
+    /* 2 x 2 grid of large, well-spaced touch targets */
+    .site-nav ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .site-nav a {
+        justify-content: center;
+        border: 1px solid var(--color-border);
+    }
+
+    .site-nav a[aria-current="page"] {
+        border-color: var(--color-primary);
+    }
+
+    .lead {
+        font-size: 1.05rem;
+    }
+
+    .hero-actions .button {
+        flex: 1 1 100%;
+    }
+
+    .hero-image {
+        width: min(100%, 16rem);
     }
 }
