@@ -90,7 +90,7 @@ p {
 
 .container {
     width: 90%;
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 0 auto;
 }
 
@@ -244,7 +244,7 @@ h3 {
 }
 
 .hero-image {
-    flex: 0 1 380px;
+    flex: 0 1 24rem;
     width: 100%;
     aspect-ratio: 4 / 5;
     object-fit: cover;
@@ -464,6 +464,8 @@ input,
 select,
 textarea {
     width: 100%;
+    max-width: 100%;
+    min-height: 2.75rem;
     padding: 0.75rem;
     border: 1px solid #b9a8ae;
     border-radius: var(--radius);
@@ -503,7 +505,7 @@ textarea {
 }
 
 .footer-column {
-    flex: 1 1 220px;
+    flex: 1 1 14rem;
 }
 
 .site-footer h2 {
@@ -524,8 +526,9 @@ textarea {
     list-style: none;
 }
 
-.footer-links li {
-    margin-bottom: 0.35rem;
+.footer-links a {
+    display: inline-block;
+    padding: 0.4rem 0;
 }
 
 .footer-copyright {
@@ -649,5 +652,43 @@ textarea {
 
     .hero-image {
         width: min(100%, 16rem);
+    }
+}
+
+
+/* ---- Preventing horizontal scroll (fix the cause, do not hide it) ---- */
+.hero-content,
+.split-text,
+.contact-info,
+.contact-form,
+.footer-column {
+    min-width: 0;
+}
+
+.hero-content h1,
+.contact-details dd,
+.footer-column p {
+    overflow-wrap: anywhere;
+}
+
+/* ---- Spacing, forms, and footer: smartphone ---- */
+@media (max-width: 600px) {
+    /* tighter section spacing everywhere the spacing variables are used */
+    :root {
+        --space-lg: 1.75rem;
+        --space-xl: 3rem;
+    }
+
+    .contact-form .button {
+        width: 100%;
+    }
+
+    .footer-columns {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .footer-column {
+        flex: 0 0 auto;
     }
 }
