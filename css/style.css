@@ -210,6 +210,9 @@ h3 {
 .site-nav a[aria-current="page"] {
     background-color: var(--color-primary);
     color: var(--color-text-on-dark);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.3em;
 }
 
 
@@ -467,7 +470,7 @@ textarea {
     max-width: 100%;
     min-height: 2.75rem;
     padding: 0.75rem;
-    border: 1px solid #b9a8ae;
+    border: 1px solid #7d6d73;
     border-radius: var(--radius);
     background-color: var(--color-surface);
     color: var(--color-text);
@@ -691,4 +694,19 @@ textarea {
     .footer-column {
         flex: 0 0 auto;
     }
+}
+
+
+/* ---- Accessibility: content cues ---- */
+.section-title + .card-grid {
+    margin-top: var(--space-md);
+}
+
+.required {
+    color: var(--color-text-muted);
+    font-weight: 400;
+}
+
+.form-note {
+    color: var(--color-text-muted);
 }
