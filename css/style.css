@@ -710,3 +710,29 @@ textarea {
 .form-note {
     color: var(--color-text-muted);
 }
+
+
+/* ---- Accessibility: keyboard focus and skip link ---- */
+/* the default focus ring (accent pink) is too faint on the dark green
+   areas, so use white there */
+.site-footer a:focus-visible,
+.cta-band a:focus-visible {
+    outline-color: #ffffff;
+}
+
+.skip-link {
+    position: absolute;
+    top: -4rem;
+    left: var(--space-sm);
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: var(--space-sm);
+    color: #ffffff;
+}
