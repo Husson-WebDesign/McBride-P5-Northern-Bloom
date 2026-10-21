@@ -73,19 +73,20 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="phone">Phone number</label>
+                        <label for="phone">Phone number <span class="required">(optional)</span></label>
                         <input type="tel" id="phone" name="phone" autocomplete="tel" aria-describedby="phone-error">
                         <p class="error-message" id="phone-error"></p>
                     </div>
 
                     <div class="form-group">
                         <label for="service">Service you are interested in <span class="required">(required)</span></label>
-                        <select id="service" name="service" required aria-describedby="service-error">
+                        <select id="service" name="service" required aria-describedby="service-description service-error">
                             <option value="">Select a service</option>
-                            <option value="general">General Floral Design</option>
-                            <option value="event">Event Planning</option>
-                            <option value="custom">Custom Floral Design</option>
+                            <option value="general" data-description="Floral arrangement design for various occasions.">General Floral Design</option>
+                            <option value="event" data-description="Event planning for weddings, corporate events, and other special occasions.">Event Planning</option>
+                            <option value="custom" data-description="Custom floral design for unique and personalized arrangements.">Custom Floral Design</option>
                         </select>
+                        <p class="field-hint" id="service-description"></p>
                         <p class="error-message" id="service-error"></p>
                     </div>
 

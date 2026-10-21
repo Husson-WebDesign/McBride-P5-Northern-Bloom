@@ -202,6 +202,7 @@ function handleFormSubmit(event) {
     const visitorName = contactForm.querySelector("#name").value.trim().split(/\s+/)[0];
 
     contactForm.reset();
+    updateServiceDescription();
     setFormStatus(
         "Success: Thank you, " + visitorName + ". Your message passed our checks. " +
         "This website is a front-end demonstration, so nothing was actually sent.",
@@ -274,7 +275,25 @@ function preselectServiceFromUrl() {
     }
 }
 
+// Shows a short description under the service menu, read from each
+// option's data-description attribute.
+const serviceSelect = document.querySelector("#service");
+const serviceDescription = document.querySelector("#service-description");
+
+function updateServiceDescription() {
+    const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+    serviceDescription.textContent = selectedOption.dataset.description || "";
+}
+
+if (serviceSelect && serviceDescription) {
+    serviceSelect.addEventListener("change", updateServiceDescription);
+}
+
 preselectServiceFromUrl();
+
+if (serviceSelect && serviceDescription) {
+    updateServiceDescription();
+}
 
 
 // =========================
