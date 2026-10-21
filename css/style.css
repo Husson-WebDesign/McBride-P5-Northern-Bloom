@@ -738,9 +738,79 @@ textarea {
 }
 
 
+/* =====================================================
+   Phase 3 - Interactive Features
+===================================================== */
+
+/* ---- Mobile menu button ---- */
+/* Hidden by default (desktop, or if JavaScript fails). */
+.menu-toggle {
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius);
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.menu-toggle:hover {
+    background-color: var(--color-secondary);
+}
+
+/* The open state is shown with a dark fill AND a flipped arrow,
+   not by color alone. */
+.menu-toggle[aria-expanded="true"] {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-dark);
+}
+
+.menu-toggle::after {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-0.15rem) rotate(45deg);
+    transition: transform 0.2s;
+}
+
+.menu-toggle[aria-expanded="true"]::after {
+    transform: translateY(0.1rem) rotate(-135deg);
+}
+
+@media (max-width: 900px) {
+    /* Show the button and collapse the nav only when JavaScript is running */
+    .js .menu-toggle {
+        display: inline-flex;
+    }
+
+    .js .site-nav {
+        display: none;
+    }
+
+    .js .site-nav.open {
+        display: block;
+    }
+
+    /* "Contact" is already in the menu. Hiding this duplicate button keeps
+       the Tab order identical to the order on screen. */
+    .header-inner > .button-small {
+        display: none;
+    }
+}
+
+
 /* ---- Respect reduced-motion preferences ---- */
 @media (prefers-reduced-motion: reduce) {
-    .button {
+    .button,
+    .menu-toggle::after {
         transition: none;
     }
 }
