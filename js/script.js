@@ -2,7 +2,14 @@
    Northern Bloom Floral & Events
    Phase 3 - JavaScript and Interactive Features
 ===================================================== */
-console.log("JavaScript loaded successfully.");
+/*
+   Contents
+   1. Page Setup
+   2. Mobile Navigation
+   3. Contact Form Validation
+   4. Service Shortcut and Description
+   5. FAQ Accordion
+*/
 
 // =========================
 // Page Setup
