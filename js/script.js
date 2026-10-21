@@ -275,3 +275,23 @@ function preselectServiceFromUrl() {
 }
 
 preselectServiceFromUrl();
+
+
+// =========================
+// FAQ Accordion
+// =========================
+const faqQuestions = document.querySelectorAll(".faq-question");
+
+// Opens or closes one answer and updates the button's ARIA state.
+function toggleFaqItem(questionButton) {
+    const faqItem = questionButton.closest(".faq-item");
+    const isOpen = faqItem.classList.toggle("open");
+
+    questionButton.setAttribute("aria-expanded", String(isOpen));
+}
+
+faqQuestions.forEach(function (questionButton) {
+    questionButton.addEventListener("click", function () {
+        toggleFaqItem(questionButton);
+    });
+});

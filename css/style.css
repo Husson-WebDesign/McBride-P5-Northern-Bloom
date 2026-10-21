@@ -861,6 +861,78 @@ textarea {
 }
 
 
+/* ---- FAQ accordion ---- */
+.faq-list {
+    display: grid;
+    gap: var(--space-xs);
+    max-width: 50rem;
+}
+
+.faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: var(--color-surface);
+}
+
+.faq-heading {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.85rem 1rem;
+    border: 0;
+    border-radius: var(--radius);
+    background-color: transparent;
+    color: var(--color-primary);
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: left;
+    cursor: pointer;
+}
+
+.faq-question:hover {
+    background-color: var(--color-secondary-light);
+}
+
+/* + and - symbols show the state without relying on color */
+.faq-question::after {
+    content: "+";
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.faq-question[aria-expanded="true"]::after {
+    content: "\2212";
+}
+
+.faq-answer {
+    padding: 0 1rem 1rem;
+}
+
+.faq-answer p:last-child {
+    margin-bottom: 0;
+}
+
+/* Answers are hidden only when JavaScript can reveal them */
+.js .faq-answer {
+    display: none;
+}
+
+.js .faq-item.open .faq-answer {
+    display: block;
+}
+
+
 /* ---- Respect reduced-motion preferences ---- */
 @media (prefers-reduced-motion: reduce) {
     .button,
