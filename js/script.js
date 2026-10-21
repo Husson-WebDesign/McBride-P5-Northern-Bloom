@@ -58,6 +58,7 @@ if (menuButton && mainNavigation) {
 // =========================
 const contactForm = document.querySelector("#contact-form");
 const formStatus = document.querySelector("#form-status");
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // One validator per field id. Each receives the trimmed value and returns
 // an error message, or an empty string when the value is acceptable.
@@ -69,9 +70,48 @@ const validators = {
         return "";
     },
 
+    email: function (value) {
+        if (value === "") {
+            return "Please enter your email address.";
+        }
+        if (!emailPattern.test(value)) {
+            return "Please enter a valid email address, such as name@example.com.";
+        }
+        return "";
+    },
+
+    // Optional: only checked when something has been typed.
+    phone: function (value) {
+        if (value === "") {
+            return "";
+        }
+        const digitCount = value.replace(/\D/g, "").length;
+        const usesPhoneCharactersOnly = /^[+\d\s().-]+$/.test(value);
+
+        if (!usesPhoneCharactersOnly || digitCount < 7 || digitCount > 15) {
+            return "Please enter a valid phone number, or leave this field blank.";
+        }
+        return "";
+    },
+
     service: function (value) {
         if (value === "") {
             return "Please choose the service you are interested in.";
+        }
+        return "";
+    },
+
+    // Optional: only checked when a date has been chosen.
+    "event-date": function (value) {
+        if (value === "") {
+            return "";
+        }
+        const chosenDate = new Date(value + "T00:00:00");
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (chosenDate < today) {
+            return "Please choose today's date or a date in the future.";
         }
         return "";
     },
@@ -204,4 +244,34 @@ if (contactForm) {
             revalidateIfShowingError(field);
         });
     });
+
+    // Past dates cannot be picked in the date picker.
+    const eventDateField = contactForm.querySelector("#event-date");
+    const todayInputValue = new Date().toLocaleDateString("en-CA");
+    eventDateField.setAttribute("min", todayInputValue);
 }
+
+
+// =========================
+// Service Shortcut and Description
+// =========================
+// The "Request" links on the Services page open the contact form with the
+// matching service already chosen (contact.html?service=event).
+function preselectServiceFromUrl() {
+    const serviceSelect = document.querySelector("#service");
+
+    if (!serviceSelect) {
+        return;
+    }
+
+    const requestedService = new URLSearchParams(window.location.search).get("service");
+    const isKnownService = Array.from(serviceSelect.options).some(function (option) {
+        return option.value !== "" && option.value === requestedService;
+    });
+
+    if (isKnownService) {
+        serviceSelect.value = requestedService;
+    }
+}
+
+preselectServiceFromUrl();
