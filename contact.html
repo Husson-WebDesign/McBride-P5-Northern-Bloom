@@ -56,43 +56,52 @@
                     </dl>
                 </section>
 
-                <form class="contact-form" action="#" method="post" aria-labelledby="form-heading">
+                <form class="contact-form" id="contact-form" action="#" method="post" aria-labelledby="form-heading">
                     <h2 id="form-heading">Send us a message</h2>
                     <p class="form-note">Fields marked "(required)" must be completed before sending.</p>
 
                     <div class="form-group">
                         <label for="name">Full name <span class="required">(required)</span></label>
-                        <input type="text" id="name" name="name" autocomplete="name" required>
+                        <input type="text" id="name" name="name" autocomplete="name" required aria-describedby="name-error">
+                        <p class="error-message" id="name-error"></p>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email address <span class="required">(required)</span></label>
-                        <input type="email" id="email" name="email" autocomplete="email" required>
+                        <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-error">
+                        <p class="error-message" id="email-error"></p>
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Phone number</label>
-                        <input type="tel" id="phone" name="phone" autocomplete="tel">
+                        <input type="tel" id="phone" name="phone" autocomplete="tel" aria-describedby="phone-error">
+                        <p class="error-message" id="phone-error"></p>
                     </div>
 
                     <div class="form-group">
-                        <label for="service">Service you are interested in</label>
-                        <select id="service" name="service">
+                        <label for="service">Service you are interested in <span class="required">(required)</span></label>
+                        <select id="service" name="service" required aria-describedby="service-error">
+                            <option value="">Select a service</option>
                             <option value="general">General Floral Design</option>
                             <option value="event">Event Planning</option>
                             <option value="custom">Custom Floral Design</option>
                         </select>
+                        <p class="error-message" id="service-error"></p>
                     </div>
 
                     <div class="form-group">
                         <label for="event-date">Event date <span class="required">(optional)</span></label>
-                        <input type="date" id="event-date" name="event-date">
+                        <input type="date" id="event-date" name="event-date" aria-describedby="event-date-error">
+                        <p class="error-message" id="event-date-error"></p>
                     </div>
 
                     <div class="form-group">
                         <label for="message">Your message <span class="required">(required)</span></label>
-                        <textarea id="message" name="message" rows="6" required></textarea>
+                        <textarea id="message" name="message" rows="6" required aria-describedby="message-error"></textarea>
+                        <p class="error-message" id="message-error"></p>
                     </div>
+
+                    <div class="form-status" id="form-status" role="status"></div>
 
                     <button type="submit" class="button">Send Message</button>
                 </form>

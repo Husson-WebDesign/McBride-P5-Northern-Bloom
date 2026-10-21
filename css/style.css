@@ -807,6 +807,60 @@ textarea {
 }
 
 
+/* ---- Form validation messages ---- */
+.error-message {
+    margin: 0.35rem 0 0;
+    color: #9b1c31;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.error-message:empty {
+    display: none;
+}
+
+/* The word "Error:" means the message never relies on color alone */
+.error-message:not(:empty)::before {
+    content: "Error: ";
+}
+
+.has-error input,
+.has-error select,
+.has-error textarea {
+    border-color: #9b1c31;
+    box-shadow: 0 0 0 1px #9b1c31;
+}
+
+.form-status {
+    margin-bottom: var(--space-sm);
+}
+
+.form-status:empty {
+    display: none;
+}
+
+.form-status.success,
+.form-status.error {
+    padding: 0.85rem 1rem;
+    border: 2px solid;
+    border-left-width: 6px;
+    border-radius: var(--radius);
+    font-weight: 600;
+}
+
+.form-status.success {
+    border-color: var(--color-primary);
+    background-color: #eef6f2;
+    color: var(--color-primary);
+}
+
+.form-status.error {
+    border-color: #9b1c31;
+    background-color: #fdf1f3;
+    color: #7d1527;
+}
+
+
 /* ---- Respect reduced-motion preferences ---- */
 @media (prefers-reduced-motion: reduce) {
     .button,
