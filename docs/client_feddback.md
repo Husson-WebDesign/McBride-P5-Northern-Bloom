@@ -169,4 +169,4 @@ My goal is for a customer to feel confident that Northern Bloom understands thei
 
 ---
 
-*Review note: This feedback is based on the visible pages and a desktop view. The Event Planning service link was checked and selected the matching option on the contact form. The form was not submitted, and a full mobile, accessibility, or source-code audit was not performed.*
+
