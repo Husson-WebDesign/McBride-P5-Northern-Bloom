@@ -944,6 +944,21 @@ textarea {
     display: none;
 }
 
+/* ---- Full-width page banner (About, Services, Contact) ---- */
+/* Sits directly under the page heading and spans the full screen width.
+   A fixed, flexible height with object-fit: cover crops the photo evenly
+   instead of stretching or distorting it. */
+.page-banner {
+    margin: 0;
+}
+
+.page-banner img {
+    display: block;
+    width: 100%;
+    height: clamp(11rem, 26vw, 22rem);
+    object-fit: cover;
+}
+
 
 /* ---- Respect reduced-motion preferences ---- */
 @media (prefers-reduced-motion: reduce) {
