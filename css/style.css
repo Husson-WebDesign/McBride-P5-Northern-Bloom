@@ -1,6 +1,6 @@
 /* =====================================================
    Northern Bloom Floral & Events
-   Phase 1 and 2 - CSS Styling, Page Layout, and Responsive Design
+   Phases 1-4 - Styling, Layout, Responsive Design, and Interactive States
    Author: Alex McBride
 ===================================================== */
 
@@ -8,6 +8,7 @@
 /* =========================
    Custom Properties
 ========================= */
+
 :root {
     /* Colors */
     --color-primary: #24443b;          /* deep spruce green */
@@ -40,6 +41,7 @@
 /* =========================
    Global Styles
 ========================= */
+
 *,
 *::before,
 *::after {
@@ -70,15 +72,6 @@ a:hover {
     color: var(--color-accent-dark);
 }
 
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-    outline: 3px solid var(--color-accent);
-    outline-offset: 3px;
-}
-
 ul {
     margin: 0;
     padding: 0;
@@ -96,8 +89,48 @@ p {
 
 
 /* =========================
+   Focus Styles and Skip Link
+========================= */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+/* ---- Accessibility: keyboard focus and skip link ---- */
+/* the default focus ring (accent pink) is too faint on the dark green
+   areas, so use white there */
+.site-footer a:focus-visible,
+.cta-band a:focus-visible {
+    outline-color: #ffffff;
+}
+
+.skip-link {
+    position: absolute;
+    top: -4rem;
+    left: var(--space-sm);
+    z-index: 100;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    background-color: var(--color-primary);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: var(--space-sm);
+    color: #ffffff;
+}
+
+
+/* =========================
    Typography
 ========================= */
+
 h1,
 h2,
 h3 {
@@ -141,6 +174,7 @@ h3 {
 /* =========================
    Header
 ========================= */
+
 .site-header {
     background-color: var(--color-surface);
     border-bottom: 1px solid var(--color-border);
@@ -181,8 +215,9 @@ h3 {
 
 
 /* =========================
-   Navigation
+   Navigation and Mobile Menu
 ========================= */
+
 .site-nav ul {
     display: flex;
     flex-wrap: wrap;
@@ -215,10 +250,54 @@ h3 {
     text-underline-offset: 0.3em;
 }
 
+/* ---- Mobile menu button ---- */
+/* Hidden by default (desktop, or if JavaScript fails). */
+.menu-toggle {
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius);
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.menu-toggle:hover {
+    background-color: var(--color-secondary);
+}
+
+/* The open state is shown with a dark fill AND a flipped arrow,
+   not by color alone. */
+.menu-toggle[aria-expanded="true"] {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-dark);
+}
+
+.menu-toggle::after {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-0.15rem) rotate(45deg);
+    transition: transform 0.2s;
+}
+
+.menu-toggle[aria-expanded="true"]::after {
+    transform: translateY(0.1rem) rotate(-135deg);
+}
+
 
 /* =========================
    Hero
 ========================= */
+
 .hero {
     padding: var(--space-xl) 0;
     background-color: var(--color-secondary);
@@ -259,6 +338,7 @@ h3 {
 /* =========================
    Main Content
 ========================= */
+
 .section {
     padding: var(--space-xl) 0;
 }
@@ -307,10 +387,26 @@ h3 {
     font-weight: 600;
 }
 
+/* ---- Full-width page banner (About, Services, Contact) ---- */
+/* Sits directly under the page heading and spans the full screen width.
+   A fixed, flexible height with object-fit: cover crops the photo evenly
+   instead of stretching or distorting it. */
+.page-banner {
+    margin: 0;
+}
+
+.page-banner img {
+    display: block;
+    width: 100%;
+    height: clamp(11rem, 26vw, 22rem);
+    object-fit: cover;
+}
+
 
 /* =========================
    Components
 ========================= */
+
 .button {
     display: inline-flex;
     align-items: center;
@@ -397,6 +493,11 @@ h3 {
     margin-top: auto;
 }
 
+/* ---- Accessibility: content cues ---- */
+.section-title + .card-grid {
+    margin-top: var(--space-md);
+}
+
 .cta-band {
     padding: var(--space-xl) 0;
     background-color: var(--color-primary);
@@ -419,447 +520,6 @@ h3 {
 .cta-band p {
     margin-bottom: 0;
 }
-
-
-/* =========================
-   Contact and Forms
-========================= */
-.contact-layout {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-lg);
-}
-
-.contact-info {
-    flex: 1 1 35%;
-}
-
-.contact-details {
-    margin-top: var(--space-md);
-}
-
-.contact-details dt {
-    margin-top: var(--space-sm);
-    color: var(--color-primary);
-    font-weight: 700;
-}
-
-.contact-details dd {
-    margin: 0;
-}
-
-.contact-form {
-    flex: 1 1 60%;
-}
-
-.form-group {
-    margin-bottom: var(--space-md);
-}
-
-label {
-    display: block;
-    margin-bottom: 0.35rem;
-    color: var(--color-primary);
-    font-weight: 600;
-}
-
-input,
-select,
-textarea {
-    width: 100%;
-    max-width: 100%;
-    min-height: 2.75rem;
-    padding: 0.75rem;
-    border: 1px solid #7d6d73;
-    border-radius: var(--radius);
-    background-color: var(--color-surface);
-    color: var(--color-text);
-    font-family: var(--font-body);
-    font-size: 1rem;
-}
-
-input:hover,
-select:hover,
-textarea:hover {
-    border-color: var(--color-primary);
-}
-
-textarea {
-    min-height: 9rem;
-    resize: vertical;
-}
-
-
-/* =========================
-   Footer
-========================= */
-.site-footer {
-    background-color: var(--color-primary-dark);
-    color: var(--color-text-on-dark);
-    font-size: 0.95rem;
-}
-
-.footer-columns {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: var(--space-lg);
-    padding: var(--space-xl) 0 var(--space-lg);
-}
-
-.footer-column {
-    flex: 1 1 14rem;
-}
-
-.site-footer h2 {
-    margin-bottom: var(--space-xs);
-    color: #ffffff;
-    font-size: 1.15rem;
-}
-
-.site-footer a {
-    color: var(--color-text-on-dark);
-}
-
-.site-footer a:hover {
-    color: #ffffff;
-}
-
-.footer-links {
-    list-style: none;
-}
-
-.footer-links a {
-    display: inline-block;
-    padding: 0.4rem 0;
-}
-
-.footer-copyright {
-    padding: var(--space-sm) 0;
-    border-top: 1px solid rgba(238, 244, 241, 0.25);
-    font-size: 0.875rem;
-}
-
-.footer-copyright p {
-    margin: 0;
-}
-
-
-/* =====================================================
-   Phase 2 - Responsive Design
-===================================================== */
-
-/* ---- Multi-column layouts: tablet ---- */
-@media (max-width: 900px) {
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* an odd last card spans the row so the grid stays balanced */
-    .card-grid > .card:last-child:nth-child(odd) {
-        grid-column: 1 / -1;
-    }
-
-    .split,
-    .contact-layout {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .split-text,
-    .split-media,
-    .contact-info,
-    .contact-form {
-        flex: 0 0 auto;
-    }
-
-    .split-media {
-        width: 100%;
-        max-width: 32rem;
-    }
-}
-
-/* ---- Multi-column layouts: smartphone ---- */
-@media (max-width: 600px) {
-    .card-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .cta-band-inner {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-}
-
-
-/* ---- Header, navigation, and hero: tablet ---- */
-@media (max-width: 900px) {
-    /* logo and contact button share the top row, nav gets its own row */
-    .site-nav {
-        order: 3;
-        flex: 1 1 100%;
-    }
-
-    .site-nav ul {
-        justify-content: center;
-    }
-
-    .hero-inner {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .hero-content {
-        flex: 0 0 auto;
-    }
-
-    .hero-image {
-        flex: 0 0 auto;
-        width: min(100%, 22rem);
-        margin-inline: auto;
-    }
-}
-
-/* ---- Header, navigation, hero, and typography: smartphone ---- */
-@media (max-width: 600px) {
-    .header-inner {
-        gap: var(--space-xs) var(--space-sm);
-    }
-
-    .site-logo-subtitle {
-        font-size: 0.8rem;
-    }
-
-    /* 2 x 2 grid of large, well-spaced touch targets */
-    .site-nav ul {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .site-nav a {
-        justify-content: center;
-        border: 1px solid var(--color-border);
-    }
-
-    .site-nav a[aria-current="page"] {
-        border-color: var(--color-primary);
-    }
-
-    .lead {
-        font-size: 1.05rem;
-    }
-
-    .hero-actions .button {
-        flex: 1 1 100%;
-    }
-
-    .hero-image {
-        width: min(100%, 16rem);
-    }
-}
-
-
-/* ---- Preventing horizontal scroll (fix the cause, do not hide it) ---- */
-.hero-content,
-.split-text,
-.contact-info,
-.contact-form,
-.footer-column {
-    min-width: 0;
-}
-
-.hero-content h1,
-.contact-details dd,
-.footer-column p {
-    overflow-wrap: anywhere;
-}
-
-/* ---- Spacing, forms, and footer: smartphone ---- */
-@media (max-width: 600px) {
-    /* tighter section spacing everywhere the spacing variables are used */
-    :root {
-        --space-lg: 1.75rem;
-        --space-xl: 3rem;
-    }
-
-    .contact-form .button {
-        width: 100%;
-    }
-
-    .footer-columns {
-        flex-direction: column;
-        gap: var(--space-md);
-    }
-
-    .footer-column {
-        flex: 0 0 auto;
-    }
-}
-
-
-/* ---- Accessibility: content cues ---- */
-.section-title + .card-grid {
-    margin-top: var(--space-md);
-}
-
-.required {
-    color: var(--color-text-muted);
-    font-weight: 400;
-}
-
-.form-note {
-    color: var(--color-text-muted);
-}
-
-
-/* ---- Accessibility: keyboard focus and skip link ---- */
-/* the default focus ring (accent pink) is too faint on the dark green
-   areas, so use white there */
-.site-footer a:focus-visible,
-.cta-band a:focus-visible {
-    outline-color: #ffffff;
-}
-
-.skip-link {
-    position: absolute;
-    top: -4rem;
-    left: var(--space-sm);
-    z-index: 100;
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius);
-    background-color: var(--color-primary);
-    color: #ffffff;
-    font-weight: 600;
-}
-
-.skip-link:focus {
-    top: var(--space-sm);
-    color: #ffffff;
-}
-
-
-/* =====================================================
-   Phase 3 - Interactive Features
-===================================================== */
-
-/* ---- Mobile menu button ---- */
-/* Hidden by default (desktop, or if JavaScript fails). */
-.menu-toggle {
-    display: none;
-    align-items: center;
-    gap: 0.6rem;
-    min-height: 2.75rem;
-    padding: 0.5rem 1rem;
-    border: 2px solid var(--color-primary);
-    border-radius: var(--radius);
-    background-color: var(--color-surface);
-    color: var(--color-primary);
-    font-family: var(--font-body);
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.menu-toggle:hover {
-    background-color: var(--color-secondary);
-}
-
-/* The open state is shown with a dark fill AND a flipped arrow,
-   not by color alone. */
-.menu-toggle[aria-expanded="true"] {
-    background-color: var(--color-primary);
-    color: var(--color-text-on-dark);
-}
-
-.menu-toggle::after {
-    content: "";
-    width: 0.5rem;
-    height: 0.5rem;
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-    transform: translateY(-0.15rem) rotate(45deg);
-    transition: transform 0.2s;
-}
-
-.menu-toggle[aria-expanded="true"]::after {
-    transform: translateY(0.1rem) rotate(-135deg);
-}
-
-@media (max-width: 900px) {
-    /* Show the button and collapse the nav only when JavaScript is running */
-    .js .menu-toggle {
-        display: inline-flex;
-    }
-
-    .js .site-nav {
-        display: none;
-    }
-
-    .js .site-nav.open {
-        display: block;
-    }
-
-    /* "Contact" is already in the menu. Hiding this duplicate button keeps
-       the Tab order identical to the order on screen. */
-    .header-inner > .button-small {
-        display: none;
-    }
-}
-
-
-/* ---- Form validation messages ---- */
-.error-message {
-    margin: 0.35rem 0 0;
-    color: #9b1c31;
-    font-size: 0.95rem;
-    font-weight: 600;
-}
-
-.error-message:empty {
-    display: none;
-}
-
-/* The word "Error:" means the message never relies on color alone */
-.error-message:not(:empty)::before {
-    content: "Error: ";
-}
-
-.has-error input,
-.has-error select,
-.has-error textarea {
-    border-color: #9b1c31;
-    box-shadow: 0 0 0 1px #9b1c31;
-}
-
-.form-status {
-    margin-bottom: var(--space-sm);
-}
-
-.form-status:empty {
-    display: none;
-}
-
-.form-status.success,
-.form-status.error {
-    padding: 0.85rem 1rem;
-    border: 2px solid;
-    border-left-width: 6px;
-    border-radius: var(--radius);
-    font-weight: 600;
-}
-
-.form-status.success {
-    border-color: var(--color-primary);
-    background-color: #eef6f2;
-    color: var(--color-primary);
-}
-
-.form-status.error {
-    border-color: #9b1c31;
-    background-color: #fdf1f3;
-    color: #7d1527;
-}
-
 
 /* ---- FAQ accordion ---- */
 .faq-list {
@@ -933,6 +593,141 @@ textarea {
 }
 
 
+/* =========================
+   Contact and Forms
+========================= */
+
+.contact-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-lg);
+}
+
+.contact-info {
+    flex: 1 1 35%;
+}
+
+.contact-details {
+    margin-top: 0;
+}
+
+.contact-details dt:first-child {
+    margin-top: 0;
+}
+
+.contact-details dt {
+    margin-top: var(--space-sm);
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.contact-details dd {
+    margin: 0;
+}
+
+.contact-form {
+    flex: 1 1 60%;
+}
+
+.form-group {
+    margin-bottom: var(--space-md);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.required {
+    color: var(--color-text-muted);
+    font-weight: 400;
+}
+
+.form-note {
+    color: var(--color-text-muted);
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    max-width: 100%;
+    min-height: 2.75rem;
+    padding: 0.75rem;
+    border: 1px solid #7d6d73;
+    border-radius: var(--radius);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 1rem;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: var(--color-primary);
+}
+
+textarea {
+    min-height: 9rem;
+    resize: vertical;
+}
+
+/* ---- Form validation messages ---- */
+.error-message {
+    margin: 0.35rem 0 0;
+    color: #9b1c31;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.error-message:empty {
+    display: none;
+}
+
+/* The word "Error:" means the message never relies on color alone */
+.error-message:not(:empty)::before {
+    content: "Error: ";
+}
+
+.has-error input,
+.has-error select,
+.has-error textarea {
+    border-color: #9b1c31;
+    box-shadow: 0 0 0 1px #9b1c31;
+}
+
+.form-status {
+    margin-bottom: var(--space-sm);
+}
+
+.form-status:empty {
+    display: none;
+}
+
+.form-status.success,
+.form-status.error {
+    padding: 0.85rem 1rem;
+    border: 2px solid;
+    border-left-width: 6px;
+    border-radius: var(--radius);
+    font-weight: 600;
+}
+
+.form-status.success {
+    border-color: var(--color-primary);
+    background-color: #eef6f2;
+    color: var(--color-primary);
+}
+
+.form-status.error {
+    border-color: #9b1c31;
+    background-color: #fdf1f3;
+    color: #7d1527;
+}
+
 /* ---- Service description under the service menu ---- */
 .field-hint {
     margin: 0.35rem 0 0;
@@ -944,21 +739,236 @@ textarea {
     display: none;
 }
 
-/* ---- Full-width page banner (About, Services, Contact) ---- */
-/* Sits directly under the page heading and spans the full screen width.
-   A fixed, flexible height with object-fit: cover crops the photo evenly
-   instead of stretching or distorting it. */
-.page-banner {
+
+/* =========================
+   Footer
+========================= */
+
+.site-footer {
+    background-color: var(--color-primary-dark);
+    color: var(--color-text-on-dark);
+    font-size: 0.95rem;
+}
+
+.footer-columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    padding: var(--space-xl) 0 var(--space-lg);
+}
+
+.footer-column {
+    flex: 1 1 14rem;
+}
+
+.site-footer h2 {
+    margin-bottom: var(--space-xs);
+    color: #ffffff;
+    font-size: 1.15rem;
+}
+
+.site-footer a {
+    color: var(--color-text-on-dark);
+}
+
+.site-footer a:hover {
+    color: #ffffff;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links a {
+    display: inline-block;
+    padding: 0.4rem 0;
+}
+
+.footer-copyright {
+    padding: var(--space-sm) 0;
+    border-top: 1px solid rgba(238, 244, 241, 0.25);
+    font-size: 0.875rem;
+}
+
+.footer-copyright p {
     margin: 0;
 }
 
-.page-banner img {
-    display: block;
-    width: 100%;
-    height: clamp(11rem, 26vw, 22rem);
-    object-fit: cover;
+
+/* =========================
+   Overflow Safeguards
+========================= */
+
+/* ---- Preventing horizontal scroll (fix the cause, do not hide it) ---- */
+.hero-content,
+.split-text,
+.contact-info,
+.contact-form,
+.footer-column {
+    min-width: 0;
 }
 
+.hero-content h1,
+.contact-details dd,
+.footer-column p {
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================
+   Responsive Styles
+========================= */
+
+/* ---- Tablet and smaller ---- */
+@media (max-width: 900px) {
+    /* Multi-column layouts: tablet */
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* an odd last card spans the row so the grid stays balanced */
+    .card-grid > .card:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+    }
+
+    .split,
+    .contact-layout {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .split-text,
+    .split-media,
+    .contact-info,
+    .contact-form {
+        flex: 0 0 auto;
+    }
+
+    .split-media {
+        width: 100%;
+        max-width: 32rem;
+    }
+
+    /* Header, navigation, and hero: tablet */
+    /* the nav gets its own row under the logo and menu button */
+    .site-nav {
+        order: 3;
+        flex: 1 1 100%;
+    }
+
+    .site-nav ul {
+        justify-content: center;
+    }
+
+    .hero-inner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-content {
+        flex: 0 0 auto;
+    }
+
+    .hero-image {
+        flex: 0 0 auto;
+        width: min(100%, 22rem);
+        margin-inline: auto;
+    }
+
+    /* Show the button and collapse the nav only when JavaScript is running */
+    .js .menu-toggle {
+        display: inline-flex;
+    }
+
+    .js .site-nav {
+        display: none;
+    }
+
+    .js .site-nav.open {
+        display: block;
+    }
+
+    /* "Contact" is already in the menu. Hiding this duplicate button keeps
+       the Tab order identical to the order on screen. */
+    .header-inner > .button-small {
+        display: none;
+    }
+}
+
+/* ---- Smartphone ---- */
+@media (max-width: 600px) {
+    /* Multi-column layouts: smartphone */
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-band-inner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Header, navigation, hero, and typography: smartphone */
+    .header-inner {
+        gap: var(--space-xs) var(--space-sm);
+    }
+
+    .site-logo-subtitle {
+        font-size: 0.8rem;
+    }
+
+    /* 2 x 2 grid of large, well-spaced touch targets */
+    .site-nav ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .site-nav a {
+        justify-content: center;
+        border: 1px solid var(--color-border);
+    }
+
+    .site-nav a[aria-current="page"] {
+        border-color: var(--color-primary);
+    }
+
+    .lead {
+        font-size: 1.05rem;
+    }
+
+    .hero-actions .button {
+        flex: 1 1 100%;
+    }
+
+    .hero-image {
+        width: min(100%, 16rem);
+    }
+
+    /* Spacing, forms, and footer: smartphone */
+    /* tighter section spacing everywhere the spacing variables are used */
+    :root {
+        --space-lg: 1.75rem;
+        --space-xl: 3rem;
+    }
+
+    .contact-form .button {
+        width: 100%;
+    }
+
+    .footer-columns {
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .footer-column {
+        flex: 0 0 auto;
+    }
+}
+
+
+/* =========================
+   Accessibility Preferences
+========================= */
 
 /* ---- Respect reduced-motion preferences ---- */
 @media (prefers-reduced-motion: reduce) {

@@ -1,6 +1,6 @@
 /* =====================================================
    Northern Bloom Floral & Events
-   Phase 3 - JavaScript and Interactive Features
+   Phases 3-4 - JavaScript and Interactive Features
 ===================================================== */
 /*
    Contents
@@ -254,9 +254,17 @@ if (contactForm) {
     });
 
     // Past dates cannot be picked in the date picker.
+    // The date is built by hand (YYYY-MM-DD) so it works the same in every browser.
     const eventDateField = contactForm.querySelector("#event-date");
-    const todayInputValue = new Date().toLocaleDateString("en-CA");
-    eventDateField.setAttribute("min", todayInputValue);
+    const now = new Date();
+    const todayInputValue =
+        now.getFullYear() + "-" +
+        String(now.getMonth() + 1).padStart(2, "0") + "-" +
+        String(now.getDate()).padStart(2, "0");
+
+    if (eventDateField) {
+        eventDateField.setAttribute("min", todayInputValue);
+    }
 }
 
 
