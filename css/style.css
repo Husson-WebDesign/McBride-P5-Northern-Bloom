@@ -162,12 +162,16 @@ h3 {
 
 .section-title {
     margin-bottom: var(--space-xs);
+    text-align: center;
 }
 
 .section-intro {
     max-width: 60ch;
+    margin-right: auto;
     margin-bottom: var(--space-lg);
+    margin-left: auto;
     color: var(--color-text-muted);
+    text-align: center;
 }
 
 
@@ -494,6 +498,31 @@ h3 {
 }
 
 /* ---- Accessibility: content cues ---- */
+.section-action {
+    margin: 0;
+    text-align: center;
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+}
+
+.portfolio-item {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: var(--color-surface);
+}
+
+.portfolio-item img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+}
+
 .section-title + .card-grid {
     margin-top: var(--space-md);
 }
@@ -524,6 +553,7 @@ h3 {
 /* ---- FAQ accordion ---- */
 .faq-list {
     display: grid;
+    margin-inline: auto;
     gap: var(--space-xs);
     max-width: 50rem;
 }
@@ -901,6 +931,12 @@ textarea {
     /* Multi-column layouts: smartphone */
     .card-grid {
         grid-template-columns: 1fr;
+    }
+
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        max-width: 26rem;
+        margin-inline: auto;
     }
 
     .cta-band-inner {
