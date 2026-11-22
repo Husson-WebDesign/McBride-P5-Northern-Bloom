@@ -7,9 +7,11 @@
    Contents
    1. Page Setup
    2. Mobile Navigation
-   3. Contact Form Validation
-   4. Service Shortcut and Description
-   5. FAQ Accordion
+   3. Service Data (data/services.json)
+   4. Contact Form Validation
+   5. Service Shortcut and Description
+   6. Service Finder
+   7. FAQ Accordion
 */
 
 // =========================
@@ -58,6 +60,227 @@ if (menuButton && mainNavigation) {
             setMenuState(false);
         }
     });
+}
+
+
+// =========================
+// Service Data (data/services.json)
+// =========================
+// Service names, descriptions, images, prices, and packages live in
+// data/services.json. These functions load that file and build the cards,
+// so what visitors see always matches the data file.
+const SERVICE_DATA_URL = "data/services.json";
+const DATA_ERROR_MESSAGE =
+    "Service information could not be displayed right now. " +
+    "Please contact the studio for details about our services and pricing.";
+let serviceData = null;
+let serviceDataRequest = null;
+
+// Loads the JSON file once and reuses the result.
+function loadServiceData() {
+    if (!serviceDataRequest) {
+        serviceDataRequest = fetch(SERVICE_DATA_URL)
+            .then(function (response) {
+                if (!response.ok) {
+                    throw new Error("Could not load " + SERVICE_DATA_URL + " (" + response.status + ")");
+                }
+                return response.json();
+            })
+            .then(function (data) {
+                serviceData = data;
+                return data;
+            });
+    }
+
+    return serviceDataRequest;
+}
+
+function createElement(tagName, className, text) {
+    const element = document.createElement(tagName);
+
+    if (className) {
+        element.className = className;
+    }
+    if (text) {
+        element.textContent = text;
+    }
+
+    return element;
+}
+
+function formatPrice(amount) {
+    return "$" + amount.toLocaleString("en-US");
+}
+
+function createPriceLine(amount) {
+    const priceLine = createElement("p", "price");
+
+    priceLine.appendChild(createElement("span", "price-label", "Starting at"));
+    priceLine.appendChild(document.createTextNode(formatPrice(amount)));
+    return priceLine;
+}
+
+// A bold label followed by a bulleted list.
+function appendListBlock(card, label, items) {
+    const labelLine = createElement("p", "card-meta");
+    const list = createElement("ul", "card-list");
+
+    labelLine.appendChild(createElement("strong", "", label + ":"));
+    items.forEach(function (item) {
+        list.appendChild(createElement("li", "", item));
+    });
+    card.appendChild(labelLine);
+    card.appendChild(list);
+}
+
+function createServiceCard(service, isCompact) {
+    const card = createElement("article", "card service-card");
+    const image = createElement("img", "card-image");
+    const actions = createElement("div", "card-actions");
+    const inquiryLink = createElement("a", "button", service.inquiry.label);
+    const learnMoreLink = createElement("a", "text-link", service.learnMore.label);
+
+    image.src = service.image.src;
+    image.alt = service.image.alt;
+    image.width = service.image.width;
+    image.height = service.image.height;
+    image.loading = "lazy";
+    card.appendChild(image);
+    card.appendChild(createElement("h3", "", service.name));
+    card.appendChild(createElement("p", "", isCompact ? service.summary : service.description));
+
+    if (!isCompact) {
+        const occasions = createElement("p", "card-meta");
+
+        occasions.appendChild(createElement("strong", "", "Suited to:"));
+        occasions.appendChild(document.createTextNode(" " + service.occasions.join(", ")));
+        card.appendChild(occasions);
+    }
+
+    inquiryLink.href = service.inquiry.href;
+    learnMoreLink.href = service.learnMore.href;
+    actions.appendChild(inquiryLink);
+    actions.appendChild(learnMoreLink);
+    card.appendChild(actions);
+    return card;
+}
+
+function createCategoryCard(category, isCompact) {
+    const card = createElement("article", "card service-card price-card");
+
+    card.appendChild(createElement("h3", "", category.name));
+    card.appendChild(createElement("p", "", isCompact ? category.homeSummary : category.description));
+
+    if (!isCompact && category.includes.length > 0) {
+        appendListBlock(card, category.includesLabel, category.includes);
+    }
+    if (!isCompact && category.note !== "") {
+        card.appendChild(createElement("p", "card-note", category.note));
+    }
+
+    card.appendChild(createPriceLine(category.startingPrice));
+    return card;
+}
+
+function createPackageCard(packageInfo, isCompact) {
+    const card = createElement("article", "card service-card price-card");
+
+    card.appendChild(createElement("h3", "", packageInfo.name + " Package"));
+    card.appendChild(createElement("p", "", packageInfo.description));
+
+    if (!isCompact) {
+        appendListBlock(card, "Included services", packageInfo.includes);
+        card.appendChild(createElement("p", "card-note", packageInfo.note));
+    }
+
+    card.appendChild(createPriceLine(packageInfo.startingPrice));
+
+    if (!isCompact) {
+        const actions = createElement("div", "card-actions");
+        const askLink = createElement("a", "button", "Ask About the " + packageInfo.name + " Package");
+
+        askLink.href = "contact.html?service=event";
+        actions.appendChild(askLink);
+        card.appendChild(actions);
+    }
+
+    return card;
+}
+
+function fillContainer(container, items, createCard) {
+    container.textContent = "";
+    items.forEach(function (item) {
+        container.appendChild(createCard(item));
+    });
+}
+
+// Each [data-render] value in the HTML names one of these functions.
+const renderers = {
+    "services-compact": function (container, data) {
+        fillContainer(container, data.services, function (item) { return createServiceCard(item, true); });
+    },
+    "services-full": function (container, data) {
+        fillContainer(container, data.services, function (item) { return createServiceCard(item, false); });
+    },
+    "categories-featured": function (container, data) {
+        const featured = data.floralCategories.filter(function (item) { return item.featured; });
+        fillContainer(container, featured, function (item) { return createCategoryCard(item, true); });
+    },
+    "categories-all": function (container, data) {
+        fillContainer(container, data.floralCategories, function (item) { return createCategoryCard(item, false); });
+    },
+    "packages-compact": function (container, data) {
+        fillContainer(container, data.packages, function (item) { return createPackageCard(item, true); });
+    },
+    "packages-full": function (container, data) {
+        fillContainer(container, data.packages, function (item) { return createPackageCard(item, false); });
+    },
+    "finder-options": function (container, data) {
+        renderFinderOptions(container, data);
+    },
+    "service-select": function (select, data) {
+        populateServiceSelect(select, data);
+    }
+};
+
+// Replaces a container's content with a helpful message and a contact link.
+function showDataError(container) {
+    const message = createElement("p", "data-message", DATA_ERROR_MESSAGE + " ");
+    const contactLink = createElement("a", "", "Contact the Studio");
+
+    contactLink.href = "contact.html";
+    message.appendChild(contactLink);
+    container.textContent = "";
+    container.appendChild(message);
+}
+
+function renderServiceData() {
+    const targets = document.querySelectorAll("[data-render]");
+
+    if (targets.length === 0) {
+        return;
+    }
+
+    loadServiceData()
+        .then(function (data) {
+            targets.forEach(function (target) {
+                const render = renderers[target.dataset.render];
+
+                if (render) {
+                    render(target, data);
+                }
+            });
+        })
+        .catch(function (error) {
+            console.error(error);
+
+            // The service menu keeps its built-in options; everything else shows the message.
+            targets.forEach(function (target) {
+                if (target.tagName !== "SELECT") {
+                    showDataError(target);
+                }
+            });
+        });
 }
 
 
@@ -272,11 +495,23 @@ if (contactForm) {
 // =========================
 // Service Shortcut and Description
 // =========================
-// The "Request" links on the Services page open the contact form with the
-// matching service already chosen (contact.html?service=event).
-function preselectServiceFromUrl() {
-    const serviceSelect = document.querySelector("#service");
+// The "Prepare an Inquiry" links open the contact form with the matching
+// service already chosen (contact.html?service=event). The visitor can still
+// change the selection.
+const serviceSelect = document.querySelector("#service");
+const serviceDescription = document.querySelector("#service-description");
 
+function findService(serviceId) {
+    if (!serviceData) {
+        return null;
+    }
+
+    return serviceData.services.find(function (service) {
+        return service.id === serviceId;
+    }) || null;
+}
+
+function preselectServiceFromUrl() {
     if (!serviceSelect) {
         return;
     }
@@ -291,24 +526,116 @@ function preselectServiceFromUrl() {
     }
 }
 
-// Shows a short description under the service menu, read from each
-// option's data-description attribute.
-const serviceSelect = document.querySelector("#service");
-const serviceDescription = document.querySelector("#service-description");
-
+// Shows the short description of the chosen service under the menu.
 function updateServiceDescription() {
-    const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
-    serviceDescription.textContent = selectedOption.dataset.description || "";
+    const service = findService(serviceSelect.value);
+
+    serviceDescription.textContent = service ? service.summary : "";
+}
+
+// Builds the service menu from the JSON data and keeps the visitor's choice.
+function populateServiceSelect(select, data) {
+    const currentChoice = select.value;
+
+    while (select.options.length > 1) {
+        select.remove(1);
+    }
+
+    data.services.forEach(function (service) {
+        const option = document.createElement("option");
+
+        option.value = service.id;
+        option.textContent = service.name;
+        select.appendChild(option);
+    });
+
+    select.value = currentChoice;
+    updateServiceDescription();
 }
 
 if (serviceSelect && serviceDescription) {
     serviceSelect.addEventListener("change", updateServiceDescription);
 }
 
+// Works immediately with the built-in options, and again after the JSON loads.
 preselectServiceFromUrl();
 
-if (serviceSelect && serviceDescription) {
-    updateServiceDescription();
+
+// =========================
+// Service Finder
+// =========================
+// Visitors choose what they need and see the matching service from the JSON data.
+const serviceFinder = document.querySelector("#service-finder");
+const finderResult = document.querySelector("#finder-result");
+
+function createFinderOption(value, labelText) {
+    const option = createElement("div", "finder-option");
+    const radio = createElement("input");
+    const label = createElement("label", "", labelText);
+
+    radio.type = "radio";
+    radio.name = "need";
+    radio.id = "need-" + value;
+    radio.value = value;
+    label.htmlFor = radio.id;
+    option.appendChild(radio);
+    option.appendChild(label);
+    return option;
+}
+
+function renderFinderOptions(container, data) {
+    container.textContent = "";
+    data.services.forEach(function (service) {
+        container.appendChild(createFinderOption(service.id, service.needLabel));
+    });
+    container.appendChild(createFinderOption("unsure", data.finder.unsureLabel));
+}
+
+function showFinderMessage(message, messageType) {
+    finderResult.textContent = "";
+    finderResult.appendChild(createElement("p", "finder-message " + messageType, message));
+}
+
+function handleFinderSubmit(event) {
+    event.preventDefault();
+
+    if (!serviceData) {
+        showFinderMessage(DATA_ERROR_MESSAGE, "error");
+        return;
+    }
+
+    const chosenOption = serviceFinder.querySelector('input[name="need"]:checked');
+
+    if (!chosenOption) {
+        showFinderMessage("Please choose an option to see a match.", "error");
+        return;
+    }
+
+    const service = findService(chosenOption.value);
+
+    if (service) {
+        finderResult.textContent = "";
+        finderResult.appendChild(createElement("p", "finder-message info", "Based on your answer, this service looks like the best fit."));
+        finderResult.appendChild(createServiceCard(service, false));
+    } else {
+        // "I'm not sure yet", or an option with no matching service.
+        const contactLink = createElement("a", "button", "Contact the Studio");
+
+        showFinderMessage(serviceData.finder.unsureMessage, "info");
+        contactLink.href = "contact.html";
+        finderResult.appendChild(contactLink);
+    }
+
+    finderResult.scrollIntoView({ block: "nearest" });
+}
+
+if (serviceFinder && finderResult) {
+    serviceFinder.addEventListener("submit", handleFinderSubmit);
+
+    // The Start Over button clears the radio buttons; this clears the result.
+    serviceFinder.addEventListener("reset", function () {
+        finderResult.textContent = "";
+    });
 }
 
 
@@ -330,3 +657,7 @@ faqQuestions.forEach(function (questionButton) {
         toggleFaqItem(questionButton);
     });
 });
+
+
+// Start loading the service data once everything above is defined.
+renderServiceData();

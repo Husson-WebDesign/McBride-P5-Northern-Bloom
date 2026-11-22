@@ -1,0 +1,229 @@
+{
+  "services": [
+    {
+      "id": "general",
+      "name": "General Floral Design",
+      "summary": "Everyday bouquets and vase arrangements, designed with care.",
+      "description": "Floral design for everyday moments, from birthday and thank-you bouquets to seasonal arrangements, corporate flowers, and sympathy designs. Arrangements may be created as hand-tied bouquets or vase arrangements, depending on the order.",
+      "occasions": [
+        "Birthdays",
+        "Anniversaries",
+        "Thank-you gifts",
+        "Congratulations",
+        "Seasonal celebrations",
+        "Corporate gifts",
+        "Sympathy"
+      ],
+      "needLabel": "A ready-to-order arrangement or bouquet",
+      "image": {
+        "src": "images/service-general.jpg",
+        "alt": "Bouquet of deep pink and lavender roses with white carnations and blue thistle, wrapped in light gray paper",
+        "width": 800,
+        "height": 600
+      },
+      "inquiry": {
+        "label": "Prepare an Inquiry About General Floral Design",
+        "href": "contact.html?service=general"
+      },
+      "learnMore": {
+        "label": "See Floral Categories and Starting Prices",
+        "href": "services.html#floral-categories"
+      }
+    },
+    {
+      "id": "event",
+      "name": "Event Planning",
+      "summary": "Floral planning and design for weddings and private celebrations.",
+      "description": "Floral and event design for weddings and private celebrations. We work with you on event type, venue, guest count, colors, atmosphere, and budget, then develop a floral plan that feels coordinated and realistic for your event. Event packages are available.",
+      "occasions": [
+        "Weddings",
+        "Private celebrations",
+        "Corporate events"
+      ],
+      "needLabel": "Flowers for a wedding or event",
+      "image": {
+        "src": "images/service-event.jpg",
+        "alt": "Bouquet of red and white roses, red tulips, and pink hydrangea wrapped in dark burgundy paper",
+        "width": 800,
+        "height": 600
+      },
+      "inquiry": {
+        "label": "Prepare an Inquiry About Event Planning",
+        "href": "contact.html?service=event"
+      },
+      "learnMore": {
+        "label": "View Event Packages",
+        "href": "events.html"
+      }
+    },
+    {
+      "id": "custom",
+      "name": "Custom Floral Design",
+      "summary": "Arrangements shaped around your colors, style, and occasion.",
+      "description": "Arrangements shaped around your colors, style, and occasion. Reference photographs are welcome for inspiration. Because flowers are natural and seasonal, we select similar flowers to match the look rather than copying another arrangement exactly.",
+      "occasions": [
+        "Gifts",
+        "Anniversaries",
+        "Celebrations",
+        "Seasonal arrangements"
+      ],
+      "needLabel": "A design made around my own colors and style",
+      "image": {
+        "src": "images/service-custom.jpg",
+        "alt": "Wildflower arrangement in a woven basket with red poppies, yellow and orange blooms, white daisies, and purple flowers against a rustic log wall",
+        "width": 516,
+        "height": 387
+      },
+      "inquiry": {
+        "label": "Prepare an Inquiry About Custom Floral Design",
+        "href": "contact.html?service=custom"
+      },
+      "learnMore": {
+        "label": "See Floral Categories and Starting Prices",
+        "href": "services.html#floral-categories"
+      }
+    }
+  ],
+  "finder": {
+    "unsureLabel": "I'm not sure yet",
+    "unsureMessage": "That is perfectly fine. Tell us a little about your occasion and the studio will help you decide which service fits."
+  },
+  "floralCategories": [
+    {
+      "id": "everyday",
+      "name": "Everyday Arrangements",
+      "featured": true,
+      "homeSummary": "Custom bouquets and vase arrangements for birthdays, anniversaries, thank-you gifts, celebrations, and everyday occasions.",
+      "description": "Custom floral arrangements for birthdays, anniversaries, thank-you gifts, congratulations, celebrations, and everyday occasions. Arrangements may be designed as hand-tied bouquets or vase arrangements depending on the order.",
+      "includesLabel": "",
+      "includes": [],
+      "note": "",
+      "startingPrice": 45
+    },
+    {
+      "id": "wedding",
+      "name": "Wedding Flowers",
+      "featured": true,
+      "homeSummary": "Personal flowers, ceremony arrangements, centerpieces, and reception floral design.",
+      "description": "Floral design for your wedding day, from personal flowers to ceremony and reception arrangements.",
+      "includesLabel": "Wedding floral services may include",
+      "includes": [
+        "Bridal bouquets",
+        "Bridesmaid bouquets",
+        "Boutonnieres",
+        "Corsages",
+        "Ceremony arrangements",
+        "Aisle flowers",
+        "Reception centerpieces",
+        "Sweetheart table flowers",
+        "Statement floral pieces"
+      ],
+      "note": "Pricing depends on event size, floral selections, quantities, and installation needs.",
+      "startingPrice": 750
+    },
+    {
+      "id": "corporate",
+      "name": "Corporate Flowers",
+      "featured": false,
+      "homeSummary": "",
+      "description": "Floral services for businesses and corporate clients.",
+      "includesLabel": "Services may include",
+      "includes": [
+        "Reception arrangements",
+        "Office flowers",
+        "Client gifts",
+        "Employee recognition",
+        "Meeting arrangements",
+        "Corporate event flowers"
+      ],
+      "note": "Recurring arrangements may be discussed directly with the studio.",
+      "startingPrice": 65
+    },
+    {
+      "id": "sympathy",
+      "name": "Sympathy Arrangements",
+      "featured": false,
+      "homeSummary": "",
+      "description": "Thoughtful floral designs for memorials, funerals, services, and expressions of sympathy.",
+      "includesLabel": "Available designs may include",
+      "includes": [
+        "Vase arrangements",
+        "Standing arrangements",
+        "Sprays",
+        "Memorial flowers",
+        "Family tribute pieces"
+      ],
+      "note": "The studio encourages customers to contact staff directly for larger memorial orders.",
+      "startingPrice": 75
+    },
+    {
+      "id": "seasonal",
+      "name": "Seasonal Bouquets",
+      "featured": true,
+      "homeSummary": "Bouquets designed around flowers and foliage available during the current season.",
+      "description": "Seasonal bouquets are designed using flowers and foliage that reflect the time of year. Availability changes throughout the season.",
+      "includesLabel": "Examples may include",
+      "includes": [
+        "Spring flowers",
+        "Summer garden-style arrangements",
+        "Autumn-inspired bouquets",
+        "Winter seasonal designs"
+      ],
+      "note": "",
+      "startingPrice": 40
+    }
+  ],
+  "packages": [
+    {
+      "id": "essential",
+      "name": "Essential",
+      "description": "The Essential Package is designed for smaller celebrations that need coordinated professional floral design without extensive venue styling.",
+      "includes": [
+        "Initial design consultation",
+        "Client floral planning",
+        "Personal flowers",
+        "Selected ceremony arrangements",
+        "Simple reception centerpieces",
+        "Basic floral coordination"
+      ],
+      "note": "This package is appropriate for smaller weddings and events with a focused floral plan.",
+      "startingPrice": 950
+    },
+    {
+      "id": "signature",
+      "name": "Signature",
+      "description": "The Signature Package provides more complete floral coordination throughout the ceremony and reception.",
+      "includes": [
+        "Design consultation",
+        "Wedding party flowers",
+        "Ceremony arrangements",
+        "Reception centerpieces",
+        "Selected statement pieces",
+        "Delivery",
+        "Standard setup",
+        "Floral coordination"
+      ],
+      "note": "This package is designed for clients who want a consistent floral look throughout multiple areas of the event.",
+      "startingPrice": 2250
+    },
+    {
+      "id": "full-service",
+      "name": "Full-Service",
+      "description": "The Full-Service Package provides complete floral and event design support for larger or more detailed celebrations.",
+      "includes": [
+        "Extended design consultation",
+        "Complete wedding party flowers",
+        "Ceremony floral design",
+        "Reception centerpieces",
+        "Statement floral arrangements",
+        "Delivery",
+        "Setup",
+        "Selected décor coordination",
+        "Floral installation",
+        "Post-event floral breakdown when required"
+      ],
+      "note": "The exact scope depends on the venue, event schedule, floral design, and client requirements.",
+      "startingPrice": 4500
+    }
+  ]
+}

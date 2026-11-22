@@ -54,111 +54,40 @@
                 <h2 class="section-title">Our Services</h2>
                 <p class="section-intro">Three ways we can help. Choose the one that fits your occasion.</p>
 
-                <div class="card-grid">
-                    <article class="card service-card">
-                        <img class="card-image" src="images/service-general.jpg" alt="Bouquet of deep pink and lavender roses with white carnations and blue thistle, wrapped in light gray paper" width="800" height="600" loading="lazy">
-                        <h3>General Floral Design</h3>
-                        <p>Floral design for everyday moments, from birthday and thank-you bouquets to seasonal arrangements, corporate flowers, and sympathy designs. Arrangements may be created as hand-tied bouquets or vase arrangements, depending on the order.</p>
-                        <p class="card-meta"><strong>Suited to:</strong> Birthdays, Anniversaries, Thank-you gifts, Congratulations, Seasonal celebrations, Corporate gifts, Sympathy</p>
-                        <div class="card-actions">
-                            <a class="button" href="contact.html?service=general">Prepare an Inquiry About General Floral Design</a>
-                            <a class="text-link" href="services.html#floral-categories">See Floral Categories and Starting Prices</a>
-                        </div>
-                    </article>
-                    <article class="card service-card">
-                        <img class="card-image" src="images/service-event.jpg" alt="Bouquet of red and white roses, red tulips, and pink hydrangea wrapped in dark burgundy paper" width="800" height="600" loading="lazy">
-                        <h3>Event Planning</h3>
-                        <p>Floral and event design for weddings and private celebrations. We work with you on event type, venue, guest count, colors, atmosphere, and budget, then develop a floral plan that feels coordinated and realistic for your event. Event packages are available.</p>
-                        <p class="card-meta"><strong>Suited to:</strong> Weddings, Private celebrations, Corporate events</p>
-                        <div class="card-actions">
-                            <a class="button" href="contact.html?service=event">Prepare an Inquiry About Event Planning</a>
-                            <a class="text-link" href="events.html">View Event Packages</a>
-                        </div>
-                    </article>
-                    <article class="card service-card">
-                        <img class="card-image" src="images/service-custom.jpg" alt="Wildflower arrangement in a woven basket with red poppies, yellow and orange blooms, white daisies, and purple flowers against a rustic log wall" width="516" height="387" loading="lazy">
-                        <h3>Custom Floral Design</h3>
-                        <p>Arrangements shaped around your colors, style, and occasion. Reference photographs are welcome for inspiration. Because flowers are natural and seasonal, we select similar flowers to match the look rather than copying another arrangement exactly.</p>
-                        <p class="card-meta"><strong>Suited to:</strong> Gifts, Anniversaries, Celebrations, Seasonal arrangements</p>
-                        <div class="card-actions">
-                            <a class="button" href="contact.html?service=custom">Prepare an Inquiry About Custom Floral Design</a>
-                            <a class="text-link" href="services.html#floral-categories">See Floral Categories and Starting Prices</a>
-                        </div>
-                    </article>
+                <div class="card-grid" data-render="services-full">
+                    <p class="data-fallback">Service information could not be displayed. Please <a href="contact.html">contact the studio</a> for details about our services and pricing.</p>
                 </div>
             </div>
         </section>
 
-        <section id="floral-categories" class="section section-alt">
+        <section id="find-service" class="section section-alt">
+            <div class="container">
+                <h2 class="section-title">Find the Right Service</h2>
+                <p class="section-intro">Tell us what you are looking for and we will point you to the service that fits.</p>
+
+                <form class="service-finder" id="service-finder">
+                    <fieldset>
+                        <legend>What are you looking for?</legend>
+                        <div id="finder-options" data-render="finder-options">
+                            <p class="data-fallback">Service information could not be displayed. Please <a href="contact.html">contact the studio</a> to talk through which service fits.</p>
+                        </div>
+                    </fieldset>
+                    <div class="finder-actions">
+                        <button type="submit" class="button">Show My Match</button>
+                        <button type="reset" class="button button-outline">Start Over</button>
+                    </div>
+                </form>
+                <div class="finder-result" id="finder-result" role="status" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <section id="floral-categories" class="section">
             <div class="container">
                 <h2 class="section-title">Floral Categories and Starting Prices</h2>
                 <p class="section-intro">Five areas of floral design, each with a starting price.</p>
 
-                <div class="card-grid">
-                    <article class="card service-card price-card">
-                        <h3>Everyday Arrangements</h3>
-                        <p>Custom floral arrangements for birthdays, anniversaries, thank-you gifts, congratulations, celebrations, and everyday occasions. Arrangements may be designed as hand-tied bouquets or vase arrangements depending on the order.</p>
-                        <p class="price"><span class="price-label">Starting at</span>$45</p>
-                    </article>
-                    <article class="card service-card price-card">
-                        <h3>Wedding Flowers</h3>
-                        <p>Floral design for your wedding day, from personal flowers to ceremony and reception arrangements.</p>
-                        <p class="card-meta"><strong>Wedding floral services may include:</strong></p>
-                        <ul class="card-list">
-                            <li>Bridal bouquets</li>
-                            <li>Bridesmaid bouquets</li>
-                            <li>Boutonnieres</li>
-                            <li>Corsages</li>
-                            <li>Ceremony arrangements</li>
-                            <li>Aisle flowers</li>
-                            <li>Reception centerpieces</li>
-                            <li>Sweetheart table flowers</li>
-                            <li>Statement floral pieces</li>
-                        </ul>
-                        <p class="card-note">Pricing depends on event size, floral selections, quantities, and installation needs.</p>
-                        <p class="price"><span class="price-label">Starting at</span>$750</p>
-                    </article>
-                    <article class="card service-card price-card">
-                        <h3>Corporate Flowers</h3>
-                        <p>Floral services for businesses and corporate clients.</p>
-                        <p class="card-meta"><strong>Services may include:</strong></p>
-                        <ul class="card-list">
-                            <li>Reception arrangements</li>
-                            <li>Office flowers</li>
-                            <li>Client gifts</li>
-                            <li>Employee recognition</li>
-                            <li>Meeting arrangements</li>
-                            <li>Corporate event flowers</li>
-                        </ul>
-                        <p class="card-note">Recurring arrangements may be discussed directly with the studio.</p>
-                        <p class="price"><span class="price-label">Starting at</span>$65</p>
-                    </article>
-                    <article class="card service-card price-card">
-                        <h3>Sympathy Arrangements</h3>
-                        <p>Thoughtful floral designs for memorials, funerals, services, and expressions of sympathy.</p>
-                        <p class="card-meta"><strong>Available designs may include:</strong></p>
-                        <ul class="card-list">
-                            <li>Vase arrangements</li>
-                            <li>Standing arrangements</li>
-                            <li>Sprays</li>
-                            <li>Memorial flowers</li>
-                            <li>Family tribute pieces</li>
-                        </ul>
-                        <p class="card-note">The studio encourages customers to contact staff directly for larger memorial orders.</p>
-                        <p class="price"><span class="price-label">Starting at</span>$75</p>
-                    </article>
-                    <article class="card service-card price-card">
-                        <h3>Seasonal Bouquets</h3>
-                        <p>Seasonal bouquets are designed using flowers and foliage that reflect the time of year. Availability changes throughout the season.</p>
-                        <p class="card-meta"><strong>Examples may include:</strong></p>
-                        <ul class="card-list">
-                            <li>Spring flowers</li>
-                            <li>Summer garden-style arrangements</li>
-                            <li>Autumn-inspired bouquets</li>
-                            <li>Winter seasonal designs</li>
-                        </ul>
-                        <p class="price"><span class="price-label">Starting at</span>$40</p>
-                    </article>
+                <div class="card-grid" data-render="categories-all">
+                    <p class="data-fallback">Service information could not be displayed. Please <a href="contact.html">contact the studio</a> for details about our services and pricing.</p>
                 </div>
                 <div class="notice">
                     <p>Floral prices shown are starting prices. Final pricing depends on flower selection, season, arrangement size, design complexity, availability, delivery, and event requirements.</p>
@@ -166,7 +95,7 @@
             </div>
         </section>
 
-        <section id="floral-policies" class="section">
+        <section id="floral-policies" class="section section-alt">
             <div class="container">
                 <h2 class="section-title">Floral Order Policies</h2>
                 <p class="section-intro">What to know before you order.</p>
@@ -188,7 +117,7 @@
             </div>
         </section>
 
-        <section id="faq" class="section section-alt">
+        <section id="faq" class="section">
             <div class="container">
                 <h2 class="section-title">Frequently Asked Questions</h2>
                 <p class="section-intro">Quick answers about working with Northern Bloom.</p>
