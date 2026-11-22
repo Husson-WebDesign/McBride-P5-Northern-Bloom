@@ -1,6 +1,6 @@
 /* =====================================================
    Northern Bloom Floral & Events
-   Phases 1-4 - Styling, Layout, Responsive Design, and Interactive States
+   Styling, Layout, Responsive Design, and Interactive States
    Author: Alex McBride
 ===================================================== */
 
@@ -655,7 +655,7 @@ h3 {
     margin: 0;
 }
 
-.contact-form {
+.contact-main {
     flex: 1 1 60%;
 }
 
@@ -827,6 +827,379 @@ textarea {
 
 
 /* =========================
+   Service, Price, and Package Cards
+========================= */
+.card-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    margin-bottom: var(--space-sm);
+    border-radius: calc(var(--radius) - 2px);
+    object-fit: cover;
+}
+
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    margin-top: auto;
+    padding-top: var(--space-xs);
+}
+
+.card-meta {
+    margin-bottom: var(--space-xs);
+    font-size: 0.95rem;
+}
+
+.card-meta strong {
+    color: var(--color-primary);
+}
+
+.card-list {
+    margin: 0 0 var(--space-sm);
+    padding-left: 1.2rem;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+.card-list li {
+    margin-bottom: 0.2rem;
+}
+
+.card .card-note {
+    margin-bottom: var(--space-sm);
+    font-size: 0.9rem;
+}
+
+.card .price {
+    margin: auto 0 0;
+    padding-top: var(--space-xs);
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.price-label {
+    display: block;
+    color: var(--color-text-muted);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.price + .card-actions {
+    margin-top: 0;
+    padding-top: var(--space-sm);
+}
+
+.staff-card .position {
+    margin-bottom: var(--space-xs);
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+/* Approved pricing, substitution, and cancellation wording */
+.notice {
+    max-width: 60rem;
+    margin: var(--space-md) auto 0;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--color-border);
+    border-left: 5px solid var(--color-primary);
+    border-radius: var(--radius);
+    background-color: var(--color-surface);
+    font-size: 0.95rem;
+}
+
+.notice p {
+    margin: 0;
+}
+
+/* Shown when the services data cannot be displayed */
+.data-message,
+.data-fallback {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid var(--color-border);
+    border-left: 5px solid var(--color-primary);
+    border-radius: var(--radius);
+    background-color: var(--color-surface);
+}
+
+.js .data-fallback {
+    display: none;
+}
+
+
+/* =========================
+   Page Content Blocks
+========================= */
+.hero-location {
+    margin: 0;
+    color: var(--color-primary);
+    font-weight: 600;
+}
+
+.prose {
+    max-width: 48rem;
+    margin-inline: auto;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-xs);
+    margin: var(--space-md) 0;
+    padding: 0;
+    list-style: none;
+}
+
+.tag-list li {
+    padding: 0.3rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background-color: var(--color-surface);
+    color: var(--color-primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.gallery-note {
+    margin: var(--space-md) 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.policy-list {
+    margin: 0 0 var(--space-sm);
+    padding-left: 1.2rem;
+}
+
+.policy-list li {
+    margin-bottom: 0.4rem;
+}
+
+.subsection-title {
+    margin-top: var(--space-lg);
+    text-align: center;
+}
+
+.process-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+}
+
+.process-list li {
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: var(--color-surface);
+    counter-increment: step;
+}
+
+.process-list li::before {
+    content: "Step " counter(step);
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.process-list h3 {
+    margin-bottom: var(--space-xs);
+}
+
+.process-list ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+.hours-list {
+    margin: 0 0 var(--space-xs);
+    padding: 0;
+    list-style: none;
+}
+
+.hours-list li {
+    margin-bottom: 0.15rem;
+}
+
+
+/* =========================
+   Service Finder
+========================= */
+.service-finder fieldset {
+    max-width: 36rem;
+    margin: 0 auto;
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: var(--color-surface);
+}
+
+.service-finder legend {
+    padding: 0 0.5rem;
+    color: var(--color-primary);
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.finder-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 2.75rem;
+}
+
+.finder-option input[type="radio"] {
+    flex: 0 0 auto;
+    width: 1.25rem;
+    min-height: 0;
+    height: 1.25rem;
+    padding: 0;
+    accent-color: var(--color-primary);
+}
+
+.finder-option label {
+    flex: 1;
+    margin: 0;
+    padding: 0.5rem 0;
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+.finder-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    max-width: 36rem;
+    margin: var(--space-md) auto 0;
+}
+
+.finder-result {
+    max-width: 42rem;
+    margin: var(--space-md) auto 0;
+}
+
+.finder-result:empty {
+    display: none;
+}
+
+.finder-message {
+    margin: 0 0 var(--space-sm);
+    padding: 0.85rem 1.1rem;
+    border: 2px solid #9b1c31;
+    border-left-width: 6px;
+    border-radius: var(--radius);
+    background-color: #fdf1f3;
+    color: #7d1527;
+    font-weight: 600;
+}
+
+.finder-message.info {
+    border-color: var(--color-primary);
+    background-color: var(--color-surface);
+    color: var(--color-text);
+}
+
+
+/* =========================
+   Inquiry Form Notices and Preview
+========================= */
+.demo-notice {
+    margin: 0 0 var(--space-md);
+    padding: 0.85rem 1.1rem;
+    border: 2px solid var(--color-primary);
+    border-left-width: 6px;
+    border-radius: var(--radius);
+    background-color: #eef6f2;
+    font-size: 0.95rem;
+}
+
+.demo-notice strong {
+    color: var(--color-primary);
+}
+
+.field-hint {
+    margin: 0.35rem 0 0;
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+.field-hint:empty {
+    display: none;
+}
+
+.sample-note,
+.contact-info .card-note {
+    font-size: 0.9rem;
+}
+
+.inquiry-preview {
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: var(--color-surface);
+}
+
+/* The preview receives focus from the script after a valid submit,
+   so a clear ring shows where the visitor has landed. */
+.inquiry-preview:focus {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+}
+
+.preview-list {
+    margin: var(--space-md) 0;
+}
+
+.preview-list dt {
+    margin-top: var(--space-sm);
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.preview-list dt:first-child {
+    margin-top: 0;
+}
+
+.preview-list dd {
+    margin: 0;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
+.preview-list dd.empty {
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
+.preview-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+
+/* =========================
    Overflow Safeguards
 ========================= */
 
@@ -834,7 +1207,7 @@ textarea {
 .hero-content,
 .split-text,
 .contact-info,
-.contact-form,
+.contact-main,
 .footer-column {
     min-width: 0;
 }
@@ -849,6 +1222,38 @@ textarea {
 /* =========================
    Responsive Styles
 ========================= */
+
+/* ---- Navigation collapses into the menu button ---- */
+@media (max-width: 1100px) {
+    /* the nav gets its own row under the logo and menu button */
+    .site-nav {
+        order: 3;
+        flex: 1 1 100%;
+    }
+
+    .site-nav ul {
+        justify-content: center;
+    }
+
+    /* Show the button and collapse the nav only when JavaScript is running */
+    .js .menu-toggle {
+        display: inline-flex;
+    }
+
+    .js .site-nav {
+        display: none;
+    }
+
+    .js .site-nav.open {
+        display: block;
+    }
+
+    /* "Contact" is already in the menu. Hiding this duplicate button keeps
+       the Tab order identical to the order on screen. */
+    .header-inner > .button-small {
+        display: none;
+    }
+}
 
 /* ---- Tablet and smaller ---- */
 @media (max-width: 900px) {
@@ -871,24 +1276,13 @@ textarea {
     .split-text,
     .split-media,
     .contact-info,
-    .contact-form {
+    .contact-main {
         flex: 0 0 auto;
     }
 
     .split-media {
         width: 100%;
-        max-width: 32rem;
-    }
-
-    /* Header, navigation, and hero: tablet */
-    /* the nav gets its own row under the logo and menu button */
-    .site-nav {
-        order: 3;
-        flex: 1 1 100%;
-    }
-
-    .site-nav ul {
-        justify-content: center;
+        max-width: 26rem;
     }
 
     .hero-inner {
@@ -904,25 +1298,6 @@ textarea {
         flex: 0 0 auto;
         width: min(100%, 22rem);
         margin-inline: auto;
-    }
-
-    /* Show the button and collapse the nav only when JavaScript is running */
-    .js .menu-toggle {
-        display: inline-flex;
-    }
-
-    .js .site-nav {
-        display: none;
-    }
-
-    .js .site-nav.open {
-        display: block;
-    }
-
-    /* "Contact" is already in the menu. Hiding this duplicate button keeps
-       the Tab order identical to the order on screen. */
-    .header-inner > .button-small {
-        display: none;
     }
 }
 
@@ -968,6 +1343,11 @@ textarea {
         border-color: var(--color-primary);
     }
 
+    /* an odd last link (five links in total) spans both columns */
+    .site-nav li:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+    }
+
     .lead {
         font-size: 1.05rem;
     }
@@ -987,7 +1367,7 @@ textarea {
         --space-xl: 3rem;
     }
 
-    .contact-form .button {
+    .contact-main .button {
         width: 100%;
     }
 
@@ -998,6 +1378,15 @@ textarea {
 
     .footer-column {
         flex: 0 0 auto;
+    }
+
+    .process-list {
+        grid-template-columns: 1fr;
+    }
+
+    .finder-actions .button,
+    .preview-actions .button {
+        flex: 1 1 100%;
     }
 }
 

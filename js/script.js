@@ -1,7 +1,8 @@
 /* =====================================================
    Northern Bloom Floral & Events
-   Phases 3-4 - JavaScript and Interactive Features
+   JavaScript and Interactive Features
 ===================================================== */
+
 /*
    Contents
    1. Page Setup
@@ -25,7 +26,7 @@ document.documentElement.classList.add("js");
 // =========================
 const menuButton = document.querySelector(".menu-toggle");
 const mainNavigation = document.querySelector("#main-navigation");
-const desktopLayoutQuery = window.matchMedia("(min-width: 901px)");
+const desktopLayoutQuery = window.matchMedia("(min-width: 1101px)");
 
 // Opens or closes the menu and keeps the button's ARIA state in sync.
 function setMenuState(isOpen) {
