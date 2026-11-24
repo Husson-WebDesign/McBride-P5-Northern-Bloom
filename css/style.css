@@ -10,25 +10,11 @@
 ========================= */
 
 :root {
-    /* Colors */
-    --color-primary: #24443b;          /* deep spruce green */
-    --color-primary-dark: #183029;     /* footer / dark bands */
-    --color-secondary: #f0dfe4;        /* soft blush petal */
-    --color-secondary-light: #f8eff2;  /* lighter blush section background */
-    --color-accent: #b03f66;           /* peony pink for buttons */
-    --color-accent-dark: #8f2f52;      /* button hover */
-    --color-background: #fdfbfa;       /* page background */
-    --color-surface: #ffffff;          /* cards and inputs */
-    --color-text: #232a27;             /* body text */
-    --color-text-muted: #56615c;       /* secondary text */
-    --color-text-on-dark: #eef4f1;     /* text on spruce backgrounds */
-    --color-border: #e2d3d8;
+    --color-primary: #24443b;    --color-primary-dark: #183029;    --color-secondary: #f0dfe4;    --color-secondary-light: #f8eff2;    --color-accent: #b03f66;    --color-accent-dark: #8f2f52;    --color-background: #fdfbfa;    --color-surface: #ffffff;    --color-text: #232a27;    --color-text-muted: #56615c;    --color-text-on-dark: #eef4f1;    --color-border: #e2d3d8;
 
-    /* Typography */
     --font-heading: Georgia, "Times New Roman", serif;
     --font-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 
-    /* Spacing and shape */
     --space-xs: 0.5rem;
     --space-sm: 1rem;
     --space-md: 1.5rem;
@@ -101,9 +87,6 @@ textarea:focus-visible {
     outline-offset: 3px;
 }
 
-/* ---- Accessibility: keyboard focus and skip link ---- */
-/* the default focus ring (accent pink) is too faint on the dark green
-   areas, so use white there */
 .site-footer a:focus-visible,
 .cta-band a:focus-visible {
     outline-color: #ffffff;
@@ -254,8 +237,6 @@ h3 {
     text-underline-offset: 0.3em;
 }
 
-/* ---- Mobile menu button ---- */
-/* Hidden by default (desktop, or if JavaScript fails). */
 .menu-toggle {
     display: none;
     align-items: center;
@@ -276,8 +257,6 @@ h3 {
     background-color: var(--color-secondary);
 }
 
-/* The open state is shown with a dark fill AND a flipped arrow,
-   not by color alone. */
 .menu-toggle[aria-expanded="true"] {
     background-color: var(--color-primary);
     color: var(--color-text-on-dark);
@@ -351,6 +330,20 @@ h3 {
     background-color: var(--color-secondary-light);
 }
 
+.section-dark {
+    background-color: var(--color-primary);
+    color: var(--color-text-on-dark);
+}
+
+.section-dark .section-title {
+    color: #ffffff;
+}
+
+.section-dark .section-intro,
+.section-dark .gallery-note {
+    color: var(--color-text-on-dark);
+}
+
 .page-heading {
     padding: var(--space-xl) 0 var(--space-lg);
     background-color: var(--color-secondary);
@@ -391,10 +384,6 @@ h3 {
     font-weight: 600;
 }
 
-/* ---- Full-width page banner (About, Services, Contact) ---- */
-/* Sits directly under the page heading and spans the full screen width.
-   A fixed, flexible height with object-fit: cover crops the photo evenly
-   instead of stretching or distorting it. */
 .page-banner {
     margin: 0;
 }
@@ -497,7 +486,6 @@ h3 {
     margin-top: auto;
 }
 
-/* ---- Accessibility: content cues ---- */
 .section-action {
     margin: 0;
     text-align: center;
@@ -512,9 +500,9 @@ h3 {
 .portfolio-item {
     margin: 0;
     overflow: hidden;
-    border: 1px solid var(--color-border);
     border-radius: var(--radius);
     background-color: var(--color-surface);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
 }
 
 .portfolio-item img {
@@ -550,7 +538,6 @@ h3 {
     margin-bottom: 0;
 }
 
-/* ---- FAQ accordion ---- */
 .faq-list {
     display: grid;
     margin-inline: auto;
@@ -593,7 +580,6 @@ h3 {
     background-color: var(--color-secondary-light);
 }
 
-/* + and - symbols show the state without relying on color */
 .faq-question::after {
     content: "+";
     flex-shrink: 0;
@@ -613,7 +599,6 @@ h3 {
     margin-bottom: 0;
 }
 
-/* Answers are hidden only when JavaScript can reveal them */
 .js .faq-answer {
     display: none;
 }
@@ -705,7 +690,6 @@ textarea {
     resize: vertical;
 }
 
-/* ---- Form validation messages ---- */
 .error-message {
     margin: 0.35rem 0 0;
     color: #9b1c31;
@@ -717,7 +701,6 @@ textarea {
     display: none;
 }
 
-/* The word "Error:" means the message never relies on color alone */
 .error-message:not(:empty)::before {
     content: "Error: ";
 }
@@ -758,7 +741,6 @@ textarea {
     color: #7d1527;
 }
 
-/* ---- Service description under the service menu ---- */
 .field-hint {
     margin: 0.35rem 0 0;
     color: var(--color-text-muted);
@@ -902,7 +884,6 @@ textarea {
     font-weight: 600;
 }
 
-/* Approved pricing, substitution, and cancellation wording */
 .notice {
     max-width: 60rem;
     margin: var(--space-md) auto 0;
@@ -918,7 +899,6 @@ textarea {
     margin: 0;
 }
 
-/* Shown when the services data cannot be displayed */
 .data-message,
 .data-fallback {
     grid-column: 1 / -1;
@@ -1047,18 +1027,24 @@ textarea {
 .service-finder fieldset {
     max-width: 36rem;
     margin: 0 auto;
-    padding: var(--space-md);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius);
-    background-color: var(--color-surface);
+    padding: 0;
+    border: 0;
 }
 
 .service-finder legend {
-    padding: 0 0.5rem;
+    margin-bottom: var(--space-sm);
+    padding: 0;
     color: var(--color-primary);
     font-family: var(--font-heading);
     font-size: 1.15rem;
     font-weight: 700;
+}
+
+.finder-options {
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background-color: var(--color-surface);
 }
 
 .finder-option {
@@ -1160,8 +1146,6 @@ textarea {
     background-color: var(--color-surface);
 }
 
-/* The preview receives focus from the script after a valid submit,
-   so a clear ring shows where the visitor has landed. */
 .inquiry-preview:focus {
     outline: 3px solid var(--color-accent);
     outline-offset: 3px;
@@ -1203,7 +1187,6 @@ textarea {
    Overflow Safeguards
 ========================= */
 
-/* ---- Preventing horizontal scroll (fix the cause, do not hide it) ---- */
 .hero-content,
 .split-text,
 .contact-info,
@@ -1223,9 +1206,7 @@ textarea {
    Responsive Styles
 ========================= */
 
-/* ---- Navigation collapses into the menu button ---- */
 @media (max-width: 1100px) {
-    /* the nav gets its own row under the logo and menu button */
     .site-nav {
         order: 3;
         flex: 1 1 100%;
@@ -1235,7 +1216,6 @@ textarea {
         justify-content: center;
     }
 
-    /* Show the button and collapse the nav only when JavaScript is running */
     .js .menu-toggle {
         display: inline-flex;
     }
@@ -1248,21 +1228,16 @@ textarea {
         display: block;
     }
 
-    /* "Contact" is already in the menu. Hiding this duplicate button keeps
-       the Tab order identical to the order on screen. */
     .header-inner > .button-small {
         display: none;
     }
 }
 
-/* ---- Tablet and smaller ---- */
 @media (max-width: 900px) {
-    /* Multi-column layouts: tablet */
     .card-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* an odd last card spans the row so the grid stays balanced */
     .card-grid > .card:last-child:nth-child(odd) {
         grid-column: 1 / -1;
     }
@@ -1301,9 +1276,7 @@ textarea {
     }
 }
 
-/* ---- Smartphone ---- */
 @media (max-width: 600px) {
-    /* Multi-column layouts: smartphone */
     .card-grid {
         grid-template-columns: 1fr;
     }
@@ -1319,7 +1292,6 @@ textarea {
         align-items: flex-start;
     }
 
-    /* Header, navigation, hero, and typography: smartphone */
     .header-inner {
         gap: var(--space-xs) var(--space-sm);
     }
@@ -1328,7 +1300,6 @@ textarea {
         font-size: 0.8rem;
     }
 
-    /* 2 x 2 grid of large, well-spaced touch targets */
     .site-nav ul {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -1343,7 +1314,6 @@ textarea {
         border-color: var(--color-primary);
     }
 
-    /* an odd last link (five links in total) spans both columns */
     .site-nav li:last-child:nth-child(odd) {
         grid-column: 1 / -1;
     }
@@ -1360,8 +1330,6 @@ textarea {
         width: min(100%, 16rem);
     }
 
-    /* Spacing, forms, and footer: smartphone */
-    /* tighter section spacing everywhere the spacing variables are used */
     :root {
         --space-lg: 1.75rem;
         --space-xl: 3rem;
@@ -1395,7 +1363,6 @@ textarea {
    Accessibility Preferences
 ========================= */
 
-/* ---- Respect reduced-motion preferences ---- */
 @media (prefers-reduced-motion: reduce) {
     .button,
     .menu-toggle::after {

@@ -3,23 +3,10 @@
    JavaScript and Interactive Features
 ===================================================== */
 
-/*
-   Contents
-   1. Page Setup
-   2. Mobile Navigation
-   3. Service Data (data/services.json)
-   4. Contact Form Validation
-   5. Service Shortcut and Description
-   6. Service Finder
-   7. FAQ Accordion
-*/
 
 // =========================
 // Page Setup
 // =========================
-// Tells the CSS that JavaScript is running. The menu button and the FAQ
-// panels only change their layout when this class is present, so the site
-// still works if the script fails to load.
 document.documentElement.classList.add("js");
 
 
@@ -30,7 +17,6 @@ const menuButton = document.querySelector(".menu-toggle");
 const mainNavigation = document.querySelector("#main-navigation");
 const desktopLayoutQuery = window.matchMedia("(min-width: 1101px)");
 
-// Opens or closes the menu and keeps the button's ARIA state in sync.
 function setMenuState(isOpen) {
     mainNavigation.classList.toggle("open", isOpen);
     menuButton.setAttribute("aria-expanded", String(isOpen));
@@ -44,7 +30,6 @@ function toggleMenu() {
 if (menuButton && mainNavigation) {
     menuButton.addEventListener("click", toggleMenu);
 
-    // Escape closes the menu and returns focus to the button.
     document.addEventListener("keydown", function (event) {
         const menuIsOpen = mainNavigation.classList.contains("open");
 
@@ -54,7 +39,6 @@ if (menuButton && mainNavigation) {
         }
     });
 
-    // Reset the menu when the window grows to the desktop layout.
     desktopLayoutQuery.addEventListener("change", function (event) {
         if (event.matches) {
             setMenuState(false);
@@ -66,9 +50,6 @@ if (menuButton && mainNavigation) {
 // =========================
 // Service Data (data/services.json)
 // =========================
-// Service names, descriptions, images, prices, and packages live in
-// data/services.json. These functions load that file and build the cards,
-// so what visitors see always matches the data file.
 const SERVICE_DATA_URL = "data/services.json";
 const DATA_ERROR_MESSAGE =
     "Service information could not be displayed right now. " +
@@ -76,7 +57,6 @@ const DATA_ERROR_MESSAGE =
 let serviceData = null;
 let serviceDataRequest = null;
 
-// Loads the JSON file once and reuses the result.
 function loadServiceData() {
     if (!serviceDataRequest) {
         serviceDataRequest = fetch(SERVICE_DATA_URL)
@@ -120,7 +100,6 @@ function createPriceLine(amount) {
     return priceLine;
 }
 
-// A bold label followed by a bulleted list.
 function appendListBlock(card, label, items) {
     const labelLine = createElement("p", "card-meta");
     const list = createElement("ul", "card-list");
@@ -133,18 +112,21 @@ function appendListBlock(card, label, items) {
     card.appendChild(list);
 }
 
-function createServiceCard(service, isCompact) {
+function createServiceCard(service, isCompact, loadImageNow) {
     const card = createElement("article", "card service-card");
     const image = createElement("img", "card-image");
     const actions = createElement("div", "card-actions");
     const inquiryLink = createElement("a", "button", service.inquiry.label);
     const learnMoreLink = createElement("a", "text-link", service.learnMore.label);
 
-    image.src = service.image.src;
+    image.addEventListener("error", function () {
+        image.remove();
+    });
     image.alt = service.image.alt;
     image.width = service.image.width;
     image.height = service.image.height;
-    image.loading = "lazy";
+    image.loading = loadImageNow ? "eager" : "lazy";
+    image.src = service.image.src;
     card.appendChild(image);
     card.appendChild(createElement("h3", "", service.name));
     card.appendChild(createElement("p", "", isCompact ? service.summary : service.description));
@@ -214,7 +196,6 @@ function fillContainer(container, items, createCard) {
     });
 }
 
-// Each [data-render] value in the HTML names one of these functions.
 const renderers = {
     "services-compact": function (container, data) {
         fillContainer(container, data.services, function (item) { return createServiceCard(item, true); });
@@ -243,7 +224,6 @@ const renderers = {
     }
 };
 
-// Replaces a container's content with a helpful message and a contact link.
 function showDataError(container) {
     const message = createElement("p", "data-message", DATA_ERROR_MESSAGE + " ");
     const contactLink = createElement("a", "", "Contact the Studio");
@@ -274,7 +254,6 @@ function renderServiceData() {
         .catch(function (error) {
             console.error(error);
 
-            // The service menu keeps its built-in options; everything else shows the message.
             targets.forEach(function (target) {
                 if (target.tagName !== "SELECT") {
                     showDataError(target);
@@ -285,14 +264,14 @@ function renderServiceData() {
 
 
 // =========================
-// Contact Form Validation
+// Inquiry Form (Preview Demonstration)
 // =========================
 const contactForm = document.querySelector("#contact-form");
 const formStatus = document.querySelector("#form-status");
+const inquiryPreview = document.querySelector("#inquiry-preview");
+const previewList = document.querySelector("#preview-list");
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// One validator per field id. Each receives the trimmed value and returns
-// an error message, or an empty string when the value is acceptable.
 const validators = {
     name: function (value) {
         if (value === "") {
@@ -311,7 +290,6 @@ const validators = {
         return "";
     },
 
-    // Optional: only checked when something has been typed.
     phone: function (value) {
         if (value === "") {
             return "";
@@ -332,7 +310,6 @@ const validators = {
         return "";
     },
 
-    // Optional: only checked when a date has been chosen.
     "event-date": function (value) {
         if (value === "") {
             return "";
@@ -347,9 +324,21 @@ const validators = {
         return "";
     },
 
+    "guest-count": function (value) {
+        if (value === "") {
+            return "";
+        }
+        const guestCount = Number(value);
+
+        if (!Number.isInteger(guestCount) || guestCount < 1 || guestCount > 5000) {
+            return "Please enter a whole number of guests, such as 75.";
+        }
+        return "";
+    },
+
     message: function (value) {
         if (value === "") {
-            return "Please enter a message.";
+            return "Please tell us about your request.";
         }
         if (value.length < 10) {
             return "Please write at least 10 characters so we understand your request.";
@@ -358,12 +347,23 @@ const validators = {
     }
 };
 
-// Every form control that has a validator.
 const formFields = contactForm
     ? Array.from(contactForm.querySelectorAll("input, select, textarea")).filter(function (field) {
           return field.id in validators;
       })
     : [];
+
+const previewFields = [
+    { label: "Name", id: "name" },
+    { label: "Email", id: "email" },
+    { label: "Phone", id: "phone" },
+    { label: "Service", id: "service" },
+    { label: "Event date", id: "event-date" },
+    { label: "Approximate guest count", id: "guest-count" },
+    { label: "Preferred colors or style", id: "style-notes" },
+    { label: "Estimated budget", id: "budget" },
+    { label: "Details about your request", id: "message" }
+];
 
 function showError(field, message) {
     document.querySelector("#" + field.id + "-error").textContent = message;
@@ -377,7 +377,6 @@ function clearError(field) {
     field.closest(".form-group").classList.remove("has-error");
 }
 
-// Checks one field. Returns true when valid, false when an error was shown.
 function validateField(field) {
     const errorMessage = validators[field.id](field.value.trim());
 
@@ -390,7 +389,6 @@ function validateField(field) {
     return true;
 }
 
-// Checks every field and returns the list of fields that failed.
 function validateForm() {
     const invalidFields = [];
 
@@ -412,9 +410,60 @@ function setFormStatus(message, statusType) {
     }
 }
 
+function getPreviewValue(field) {
+    if (field.tagName === "SELECT") {
+        return field.options[field.selectedIndex].textContent;
+    }
+
+    const value = field.value.trim();
+
+    if (field.id === "event-date" && value !== "") {
+        return new Date(value + "T00:00:00").toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+        });
+    }
+
+    return value;
+}
+
+function buildPreview() {
+    previewList.textContent = "";
+
+    previewFields.forEach(function (item) {
+        const value = getPreviewValue(contactForm.querySelector("#" + item.id));
+        const detail = createElement("dd", value === "" ? "empty" : "", value === "" ? "Not provided" : value);
+
+        previewList.appendChild(createElement("dt", "", item.label));
+        previewList.appendChild(detail);
+    });
+}
+
+function showPreview() {
+    buildPreview();
+    contactForm.hidden = true;
+    inquiryPreview.hidden = false;
+    inquiryPreview.focus();
+}
+
+function editInquiry() {
+    inquiryPreview.hidden = true;
+    contactForm.hidden = false;
+    contactForm.querySelector("#name").focus();
+}
+
+function startOverInquiry() {
+    contactForm.reset();
+    formFields.forEach(clearError);
+    setFormStatus("", "");
+    updateServiceDescription();
+    inquiryPreview.hidden = true;
+    contactForm.hidden = false;
+    contactForm.querySelector("#name").focus();
+}
+
 function handleFormSubmit(event) {
-    // GitHub Pages has no server to receive the form, so the browser's
-    // default submit is always stopped. This is a front-end demonstration.
     event.preventDefault();
 
     const invalidFields = validateForm();
@@ -430,20 +479,10 @@ function handleFormSubmit(event) {
         return;
     }
 
-    const visitorName = contactForm.querySelector("#name").value.trim().split(/\s+/)[0];
-
-    contactForm.reset();
-    updateServiceDescription();
-    setFormStatus(
-        "Success: Thank you, " + visitorName + ". Your message passed our checks. " +
-        "This website is a front-end demonstration, so nothing was actually sent.",
-        "success"
-    );
-    formStatus.scrollIntoView({ block: "nearest" });
+    setFormStatus("", "");
+    showPreview();
 }
 
-// Re-checks a field while the visitor fixes it, so the message disappears
-// as soon as the problem is solved.
 function revalidateIfShowingError(field) {
     if (field.closest(".form-group").classList.contains("has-error")) {
         validateField(field);
@@ -451,14 +490,12 @@ function revalidateIfShowingError(field) {
 }
 
 if (contactForm) {
-    // Our own messages replace the browser's pop-up bubbles. Without
-    // JavaScript the attribute is never added and native validation still works.
     contactForm.setAttribute("novalidate", "");
     contactForm.addEventListener("submit", handleFormSubmit);
+    document.querySelector("#edit-inquiry").addEventListener("click", editInquiry);
+    document.querySelector("#start-over-inquiry").addEventListener("click", startOverInquiry);
 
     formFields.forEach(function (field) {
-        // Leaving an empty field alone avoids scolding people who are
-        // only tabbing through; empty fields are caught on submit.
         field.addEventListener("blur", function () {
             const hasValue = field.value.trim() !== "";
             const hasError = field.closest(".form-group").classList.contains("has-error");
@@ -477,8 +514,6 @@ if (contactForm) {
         });
     });
 
-    // Past dates cannot be picked in the date picker.
-    // The date is built by hand (YYYY-MM-DD) so it works the same in every browser.
     const eventDateField = contactForm.querySelector("#event-date");
     const now = new Date();
     const todayInputValue =
@@ -495,9 +530,6 @@ if (contactForm) {
 // =========================
 // Service Shortcut and Description
 // =========================
-// The "Prepare an Inquiry" links open the contact form with the matching
-// service already chosen (contact.html?service=event). The visitor can still
-// change the selection.
 const serviceSelect = document.querySelector("#service");
 const serviceDescription = document.querySelector("#service-description");
 
@@ -526,14 +558,12 @@ function preselectServiceFromUrl() {
     }
 }
 
-// Shows the short description of the chosen service under the menu.
 function updateServiceDescription() {
     const service = findService(serviceSelect.value);
 
     serviceDescription.textContent = service ? service.summary : "";
 }
 
-// Builds the service menu from the JSON data and keeps the visitor's choice.
 function populateServiceSelect(select, data) {
     const currentChoice = select.value;
 
@@ -557,14 +587,12 @@ if (serviceSelect && serviceDescription) {
     serviceSelect.addEventListener("change", updateServiceDescription);
 }
 
-// Works immediately with the built-in options, and again after the JSON loads.
 preselectServiceFromUrl();
 
 
 // =========================
 // Service Finder
 // =========================
-// Visitors choose what they need and see the matching service from the JSON data.
 const serviceFinder = document.querySelector("#service-finder");
 const finderResult = document.querySelector("#finder-result");
 
@@ -616,9 +644,8 @@ function handleFinderSubmit(event) {
     if (service) {
         finderResult.textContent = "";
         finderResult.appendChild(createElement("p", "finder-message info", "Based on your answer, this service looks like the best fit."));
-        finderResult.appendChild(createServiceCard(service, false));
+        finderResult.appendChild(createServiceCard(service, false, true));
     } else {
-        // "I'm not sure yet", or an option with no matching service.
         const contactLink = createElement("a", "button", "Contact the Studio");
 
         showFinderMessage(serviceData.finder.unsureMessage, "info");
@@ -632,7 +659,6 @@ function handleFinderSubmit(event) {
 if (serviceFinder && finderResult) {
     serviceFinder.addEventListener("submit", handleFinderSubmit);
 
-    // The Start Over button clears the radio buttons; this clears the result.
     serviceFinder.addEventListener("reset", function () {
         finderResult.textContent = "";
     });
@@ -644,7 +670,6 @@ if (serviceFinder && finderResult) {
 // =========================
 const faqQuestions = document.querySelectorAll(".faq-question");
 
-// Opens or closes one answer and updates the button's ARIA state.
 function toggleFaqItem(questionButton) {
     const faqItem = questionButton.closest(".faq-item");
     const isOpen = faqItem.classList.toggle("open");
@@ -659,5 +684,4 @@ faqQuestions.forEach(function (questionButton) {
 });
 
 
-// Start loading the service data once everything above is defined.
 renderServiceData();

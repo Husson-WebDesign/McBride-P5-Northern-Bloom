@@ -17,9 +17,9 @@
       "needLabel": "A ready-to-order arrangement or bouquet",
       "image": {
         "src": "images/service-general.jpg",
-        "alt": "Bouquet of deep pink and lavender roses with white carnations and blue thistle, wrapped in light gray paper",
-        "width": 800,
-        "height": 600
+        "alt": "Three bouquets of red roses wrapped in kraft paper with red ribbon, standing in glass vases",
+        "width": 750,
+        "height": 562
       },
       "inquiry": {
         "label": "Prepare an Inquiry About General Floral Design",
@@ -43,7 +43,7 @@
       "needLabel": "Flowers for a wedding or event",
       "image": {
         "src": "images/service-event.jpg",
-        "alt": "Bouquet of red and white roses, red tulips, and pink hydrangea wrapped in dark burgundy paper",
+        "alt": "Close-up of a pastel bouquet with peach and yellow ranunculus, pink dahlia, white tulips, and soft blue flowers",
         "width": 800,
         "height": 600
       },
@@ -70,9 +70,9 @@
       "needLabel": "A design made around my own colors and style",
       "image": {
         "src": "images/service-custom.jpg",
-        "alt": "Wildflower arrangement in a woven basket with red poppies, yellow and orange blooms, white daisies, and purple flowers against a rustic log wall",
-        "width": 516,
-        "height": 387
+        "alt": "Arrangement of pink and lavender roses with purple allium and eucalyptus, tied with a pink bow",
+        "width": 519,
+        "height": 389
       },
       "inquiry": {
         "label": "Prepare an Inquiry About Custom Floral Design",

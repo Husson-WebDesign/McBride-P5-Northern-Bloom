@@ -46,7 +46,7 @@
         </section>
 
         <figure class="page-banner">
-            <img src="images/banner-contact.webp" alt="Close-up of pink bell-shaped flowers surrounded by red and pink blooms and blue cornflowers" width="551" height="362">
+            <img src="images/banner-contact.webp" alt="Wildflower bouquet of pink coneflowers, yellow cosmos, and a white daisy in a glass vase" width="1600" height="400">
         </figure>
 
         <section id="contact" class="section">
@@ -90,55 +90,83 @@
 
                 <div class="contact-main">
                     <form class="contact-form" id="contact-form" action="#" method="get" aria-labelledby="form-heading">
-                        <h2 id="form-heading">Send us a message</h2>
-                        <p class="form-note">Fields marked "(required)" must be completed before sending.</p>
+                        <h2 id="form-heading">Prepare Your Inquiry</h2>
+                        <p class="demo-notice"><strong>Demonstration only.</strong> This form does not send or save any information. When you complete it, you will see a preview of your answers on this page. To reach the studio, call <a href="tel:+12075550105">207-555-0105</a> or email <a href="mailto:sophia@northernbloom.example">sophia@northernbloom.example</a>.</p>
+                        <p class="form-note">Fields marked "(required)" must be completed before previewing.</p>
 
-                        <div class="form-group">
-                            <label for="name">Full name <span class="required">(required)</span></label>
-                            <input type="text" id="name" name="name" autocomplete="name" required aria-describedby="name-error">
-                            <p class="error-message" id="name-error"></p>
-                        </div>
+                    <div class="form-group">
+                        <label for="name">Full name <span class="required">(required)</span></label>
+                        <input type="text" id="name" name="name" autocomplete="name" required aria-describedby="name-error">
+                        <p class="error-message" id="name-error"></p>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="email">Email address <span class="required">(required)</span></label>
-                            <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-error">
-                            <p class="error-message" id="email-error"></p>
-                        </div>
+                    <div class="form-group">
+                        <label for="email">Email address <span class="required">(required)</span></label>
+                        <input type="email" id="email" name="email" autocomplete="email" required aria-describedby="email-error">
+                        <p class="error-message" id="email-error"></p>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="phone">Phone number <span class="required">(optional)</span></label>
-                            <input type="tel" id="phone" name="phone" autocomplete="tel" aria-describedby="phone-error">
-                            <p class="error-message" id="phone-error"></p>
-                        </div>
+                    <div class="form-group">
+                        <label for="phone">Phone number <span class="required">(optional)</span></label>
+                        <input type="tel" id="phone" name="phone" autocomplete="tel" aria-describedby="phone-error">
+                        <p class="error-message" id="phone-error"></p>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="service">Service you are interested in <span class="required">(required)</span></label>
-                            <select id="service" name="service" required aria-describedby="service-description service-error" data-render="service-select">
-                                <option value="">Select a service</option>
-                                <option value="general">General Floral Design</option>
-                                <option value="event">Event Planning</option>
-                                <option value="custom">Custom Floral Design</option>
-                            </select>
-                            <p class="field-hint" id="service-description"></p>
-                            <p class="error-message" id="service-error"></p>
-                        </div>
+                    <div class="form-group">
+                        <label for="service">Service you are interested in <span class="required">(required)</span></label>
+                        <select id="service" name="service" required aria-describedby="service-description service-error" data-render="service-select">
+                            <option value="">Select a service</option>
+                            <option value="general">General Floral Design</option>
+                            <option value="event">Event Planning</option>
+                            <option value="custom">Custom Floral Design</option>
+                        </select>
+                        <p class="field-hint" id="service-description"></p>
+                        <p class="error-message" id="service-error"></p>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="event-date">Event date <span class="required">(optional)</span></label>
-                            <input type="date" id="event-date" name="event-date" aria-describedby="event-date-error">
-                            <p class="error-message" id="event-date-error"></p>
-                        </div>
+                    <div class="form-group">
+                        <label for="event-date">Event date <span class="required">(optional)</span></label>
+                        <input type="date" id="event-date" name="event-date" aria-describedby="event-date-error">
+                        <p class="error-message" id="event-date-error"></p>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="message">Your message <span class="required">(required)</span></label>
-                            <textarea id="message" name="message" rows="6" required aria-describedby="message-error"></textarea>
-                            <p class="error-message" id="message-error"></p>
-                        </div>
+                    <div class="form-group">
+                        <label for="guest-count">Approximate guest count <span class="required">(optional)</span></label>
+                        <input type="number" id="guest-count" name="guest-count" min="1" inputmode="numeric" aria-describedby="guest-count-error">
+                        <p class="error-message" id="guest-count-error"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="style-notes">Preferred colors or style <span class="required">(optional)</span></label>
+                        <input type="text" id="style-notes" name="style-notes">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Estimated budget <span class="required">(optional)</span></label>
+                        <input type="text" id="budget" name="budget">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Details about your request <span class="required">(required)</span></label>
+                        <textarea id="message" name="message" rows="6" required aria-describedby="message-error"></textarea>
+                        <p class="error-message" id="message-error"></p>
+                    </div>
 
                         <div class="form-status" id="form-status" role="status"></div>
 
-                        <button type="submit" class="button">Send Message</button>
+                        <button type="submit" class="button">Preview Inquiry</button>
                     </form>
+
+                    <section class="inquiry-preview" id="inquiry-preview" aria-labelledby="preview-heading" tabindex="-1" hidden>
+                        <h2 id="preview-heading">Your Inquiry Preview</h2>
+                        <p class="demo-notice"><strong>Preview only.</strong> Nothing has been sent or saved. To contact the studio, call <a href="tel:+12075550105">207-555-0105</a> or email <a href="mailto:sophia@northernbloom.example">sophia@northernbloom.example</a>.</p>
+                        <dl class="preview-list" id="preview-list"></dl>
+                        <p class="card-note">Event availability is not guaranteed until the studio confirms a request.</p>
+                        <div class="preview-actions">
+                            <button type="button" class="button" id="edit-inquiry">Edit Inquiry</button>
+                            <button type="button" class="button button-outline" id="start-over-inquiry">Start Over</button>
+                        </div>
+                    </section>
                 </div>
             </div>
         </section>

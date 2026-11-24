@@ -4,7 +4,7 @@
 
 This project is a responsive website for Northern Bloom Floral & Events, a florist and event design studio in Bangor, Maine. The site introduces the studio, shows a floral gallery, explains the floral services and event packages with approved starting prices, answers common questions, and lets visitors prepare an inquiry.
 
-It was built in stages, from semantic HTML through CSS styling, responsive design and accessibility, JavaScript interactivity, quality assurance, and client revisions. It uses plain HTML, CSS, and JavaScript with no frameworks or templates.
+It was built in phases, from semantic HTML through CSS styling, responsive design and accessibility, JavaScript interactivity, quality assurance, and client revisions. It uses plain HTML, CSS, and JavaScript with no frameworks or templates.
 
 ## Client
 
@@ -66,7 +66,6 @@ https://husson-webdesign.github.io/McBride-P5-Northern-Bloom/
 
 https://github.com/husson-webdesign/McBride-P5-Northern-Bloom
 
-(Confirm both links match your actual repository before submitting.)
 
 ## Project Structure
 
@@ -155,11 +154,16 @@ The photographs were supplied for this class project. Their original sources and
 |---|---|---|---|
 | `york-flowers.jpg` | York-Flowers.png | Home hero | To be confirmed |
 | `banner-about.jpg` | bouquet-flowers-bouquet-of-flowers-emotions-9a9537-1024.jpg | About banner | To be confirmed |
-| `banner-services.webp`, `service-custom.jpg` | images (5).jpg | Floral Services banner, Custom Floral Design card | To be confirmed |
-| `banner-contact.webp` | images (6).jpg | Contact banner | To be confirmed |
-| `portfolio-pink-rose-bouquet.jpg`, `service-general.jpg`, `banner-events.webp` | flower-bouquet-with-pink-roses-blue-thistle-mimosa-white-roses_75.jpg | Home gallery, General Floral Design card, Events banner | To be confirmed |
-| `portfolio-red-white-bouquet.jpg`, `service-event.jpg` | top-view-bouquet-with-white-color-roses-red-tulips-pink-hydrangea-greenery_31.jpg | Home gallery, Event Planning card | To be confirmed |
-| `portfolio-autumn-bouquet.jpg` | colorful-flowers-vase_50.jpg | Home gallery, About page | To be confirmed |
+| `banner-services.webp` | images (5).jpg | Floral Services banner | To be confirmed |
+| `banner-events.webp` | unnamed (1).png | Events & Packages banner | To be confirmed |
+| `banner-contact.webp` | IMG_6032-scaled.jpg | Contact banner | To be confirmed |
+| `about-bouquet.jpg` | 20240430051447_file_6631270732b81_663127534bd7b.png | About page photo | To be confirmed |
+| `portfolio-autumn-bouquet.jpg` | colorful-flowers-vase_50.jpg | Home gallery | To be confirmed |
+| `portfolio-pink-rose-bouquet.jpg` | flower-bouquet-with-pink-roses-blue-thistle-mimosa-white-roses_75.jpg | Home gallery | To be confirmed |
+| `portfolio-red-white-bouquet.jpg` | top-view-bouquet-with-white-color-roses-red-tulips-pink-hydrangea-greenery_31.jpg | Home gallery | To be confirmed |
+| `service-general.jpg` | 2331_1440.jpg | General Floral Design card | To be confirmed |
+| `service-event.jpg` | 162079-pastel-wildflower-bouquets.jpeg | Event Planning card | To be confirmed |
+| `service-custom.jpg` | images (8).jpg | Custom Floral Design card | To be confirmed |
 
 All images were resized and compressed for the web. Each has a text description for screen readers.
 
@@ -197,8 +201,8 @@ Items marked `[x]` were checked against the client brief and by testing. Items m
 - [x] Website navigation works.
 - [x] JavaScript features work: mobile menu, service finder, inquiry preview, service shortcut, FAQ, and JSON-driven services.
 - [x] The inquiry form clearly states that it is a demonstration and never claims anything was sent or booked.
-- [ ] Client revision requests are tested on the live website and ticked above.
-- [ ] Final website is published through GitHub Pages and tested in at least two browsers.
+- [x] Client revision requests are tested on the live website and ticked above.
+- [x] Final website is published through GitHub Pages and tested in at least two browsers.
 - [ ] Image sources and licenses are confirmed.
 
 ## Final Project Status
